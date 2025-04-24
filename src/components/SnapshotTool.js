@@ -18,11 +18,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
   const [fileFormat, setFileFormat] = useState("pdf");
   const [fetchError, setFetchError] = useState("");
 
-  // Reset navigation loading when the component mounts
-  useEffect(() => {
-    setIsNavLoading(false);
-  }, [setIsNavLoading]);
-
+  
   // Request notification permission on mount
   useEffect(() => {
     if ("Notification" in window && Notification.permission !== "granted" && Notification.permission !== "denied") {
@@ -151,7 +147,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
 
     setTimeout(() => {
       setShowInfoPopup(false);
-    }, 5000);
+    }, 8000);
 
     try {
       const { holders, metadata } = await fetchAllNFTHolders(contractAddress);
@@ -195,23 +191,24 @@ const SnapshotTool = ({ setIsNavLoading }) => {
       alert("No holders to download.");
       return;
     }
-
+  
     if (fileFormat === "pdf") {
       const doc = new jsPDF();
-      const lineHeight = 10;
-      const pageHeight = doc.internal.pageSize.height;
-      const margin = 10;
-      let y = margin;
-
+      const lineHeight = 10; // Height per line
+      const pageHeight = doc.internal.pageSize.height; // Typically 297mm or ~842 points for A4
+      const margin = 10; // Top and bottom margin
+      let y = margin; // Starting y-position
+  
       addresses.forEach((addr, index) => {
+        // Check if the current line exceeds the page height
         if (y + lineHeight > pageHeight - margin) {
-          doc.addPage();
-          y = margin;
+          doc.addPage(); // Add a new page
+          y = margin; // Reset y-position to the top of the new page
         }
-        doc.text(addr, margin, y);
-        y += lineHeight;
+        doc.text(addr, margin, y); // Add the address at the current position
+        y += lineHeight; // Move to the next line
       });
-
+  
       doc.save("holders.pdf");
     } else if (fileFormat === "xml") {
       const xmlContent = `<holders>\n${addresses
@@ -229,16 +226,25 @@ const SnapshotTool = ({ setIsNavLoading }) => {
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", position: "relative" }}>
-      {/* Blurred content when access not granted */}
       <div className={accessGranted ? "" : "blur-content"}>
-        {/* Main Content */}
+        <header className="sticky-header">
+          <img
+            src="https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreiguhll5qwfac6x36v362nv2mhgl7so45dd262zpulwq7c4tfwbedq"
+            alt="OctoNads Logo"
+            className="header-logo"
+          />
+          <div className="header-title">
+            <h1>SNAPSHOT TOOL</h1>
+            <h2 className="subheading">(Monad Testnet)</h2>
+          </div>
+          <div className="header-spacer"></div>
+        </header>
         <div className="container">
           {fetchError && (
             <div className="error-message">
               {fetchError}
             </div>
           )}
-          
           <form onSubmit={handleFormSubmit}>
             <label htmlFor="contractAddress">NFT Contract Address:</label>
             <input
@@ -369,6 +375,19 @@ const SnapshotTool = ({ setIsNavLoading }) => {
             {["GMONAD", "GOCTO", "GCHOG", "GCHOGSTAR", "GMOO", "GDAKS", "G10K", "GBLOCK", "GMEOW", "GMOPO", "GCANZ"][index]}
           </div>
         ))}
+
+        <footer>
+          <div className="copyright">© 2025</div>
+          <div className="powered-by">Powered by OctoNads</div>
+          <div className="social-icons">
+            <a href="https://x.com/OctoNads" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-twitter social-logo" aria-label="Twitter"></i>
+            </a>
+            <a href="https://discord.com/invite/octonads" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-discord social-logo" aria-label="Discord"></i>
+            </a>
+          </div>
+        </footer>
       </div>
 
       {/* Access Modal */}
@@ -397,7 +416,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
         </div>
       </div>
 
-      {/* Info Popup Modal */}
+      {/* Info Popup Modal (Shown for 5 seconds when fetching starts) */}
       {showInfoPopup && (
         <div className="modal" id="infoModal">
           <div className="modal-content">

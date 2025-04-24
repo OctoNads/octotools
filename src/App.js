@@ -17,7 +17,7 @@ function App() {
     setTimeout(() => {
       navigate(path);
       setIsLoading(false);
-    }, 2000); 
+    }, 2000); s
   };
 
   const title = location.pathname === "/snapshot" ? "SNAPSHOT TOOL" : location.pathname === "/wallet-checker" ? "WALLET CHECKER TOOL" : "";
