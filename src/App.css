@@ -905,7 +905,7 @@ footer {
 
   .checker-input,
   .checker-wallet-address {
-    max-width: 414px;
+    max-width: 550px;
     padding: 8px;
     font-size: 13px;
   }
@@ -931,7 +931,7 @@ footer {
   }
 
   .checker-project-card {
-    width: 130px;
+    width: 150px;
     height: 160px;
     padding: 10px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
@@ -983,13 +983,13 @@ footer {
   #checker-result,
   .checker-error,
   #checker-download-options {
-    max-width: 414px;
+    max-width: 750px;
   }
 }
 
 @media (max-width: 600px) {
   .checker-container {
-    margin: 50px auto 120px;
+    margin: 60px auto 120px;
     padding: 12px;
     padding-bottom: 120px;
   }
@@ -1010,7 +1010,7 @@ footer {
 
   .checker-input,
   .checker-wallet-address {
-    max-width: 276px;
+    max-width: 425px;
   }
 
   .checker-search-bar-container {
@@ -1026,7 +1026,7 @@ footer {
   #checker-result,
   .checker-error,
   #checker-download-options {
-    max-width: 276px;
+    max-width: 485px;
   }
 
   .checker-result-item {
@@ -1047,7 +1047,7 @@ footer {
 
 @media (max-width: 400px) {
   .checker-container {
-    margin: 50px auto 140px;
+    margin: 95px auto 140px;
     padding: 10px;
     padding-bottom: 140px;
   }
