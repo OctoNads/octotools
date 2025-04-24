@@ -5,3 +5,9 @@
 
 [functions]
   node_bundler = "esbuild"
+
+
+[[redirects]]
+from = "/api/*"            # Route API requests to functions
+to = "/.netlify/functions/:splat"
+status = 200
