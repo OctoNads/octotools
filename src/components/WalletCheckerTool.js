@@ -19,7 +19,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
       name: "Skrumpets",
       logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreiguhll5qwfac6x36v362nv2mhgl7so45dd262zpulwq7c4tfwbedq",
       twitter: "https://x.com/skrumpeys",
-      discord: "",
+      discord: "https://discord.gg/chog",
     },
     {
       name: "Spicky",
@@ -60,8 +60,10 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
     setFloatingTextStyles(initialStyles);
 
     const moveFloatingTexts = () => {
-      const maxX = window.innerWidth - 100;
-      const maxY = window.innerHeight - 50;
+      const textWidth = 150; // Approximate width for text at 24px
+      const textHeight = 30; // Approximate height
+      const maxX = window.innerWidth - textWidth;
+      const maxY = window.innerHeight - textHeight;
       const newStyles = floatingTexts.map(() => ({
         left: `${Math.random() * maxX}px`,
         top: `${Math.random() * maxY}px`,
@@ -189,6 +191,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", position: "relative" }}>
       <div className={accessGranted ? "" : "blur-content"}>
+       
         <div className="checker-container">
           {fetchError && <div className="checker-error">{fetchError}</div>}
           <form className="checker-form" onSubmit={handleSearch}>
@@ -201,7 +204,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
                 className="checker-search-bar"
               />
             </div>
-            <label className="checker-label">Select NFT Projects:</label>
+            <label className="checker-label">Select Projects:</label>
             <div className="checker-card-scroll">
               <div className="checker-project-grid">
                 {filteredProjects.length > 0 ? (
@@ -364,8 +367,25 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
       {showCompletion && (
         <div className="modal" id="completionModal">
           <div className="modal-content">
+            <span className="close" onClick={() => setShowCompletion(false)}>×</span>
             <h2>Eligibility Check Completed</h2>
             <p>Wallet eligibility has been successfully checked!</p>
+            <div className="eligibility-summary-container">
+              <p>
+                Eligible for {Object.values(eligibilityResults).filter((r) => r.isEligible).length} out of{" "}
+                {Object.keys(eligibilityResults).length} selected projects.
+              </p>
+              <div className="eligibility-list">
+                {Object.entries(eligibilityResults).map(([project, result]) => (
+                  <div
+                    key={project}
+                    className={`eligibility-item ${result.isEligible ? "eligible" : "not-eligible"}`}
+                  >
+                    <span>{project}</span>: {result.isEligible ? "Eligible" : "Not Eligible"}
+                  </div>
+                ))}
+              </div>
+            </div>
             {Object.values(eligibilityResults).some((r) => r.isEligible) && (
               <button onClick={handleShare} className="checker-share-button">
                 Share on X
