@@ -149,7 +149,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
   };
   
   const handleShare = () => {
-    const photoLink = "https://octonads.com/eligibility-photo.jpg";
+    const photoLink = "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreicacmtobxh4luaqxt2zwl4wbf6snbzotzvxxr5doxtbzbt3ph2o64";
     const getTwitterUsername = (twitterUrl) => {
       if (!twitterUrl) return null;
       const parts = twitterUrl.split('/');
