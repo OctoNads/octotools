@@ -149,7 +149,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
   };
   
   const handleShare = () => {
-    const photoLink = "https://octotools.xyz/share";
+    const photoLink = "https://octotools.xyz/";
     const getTwitterUsername = (twitterUrl) => {
       if (!twitterUrl) return null;
       const parts = twitterUrl.split('/');
