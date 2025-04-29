@@ -4,29 +4,12 @@ import "../App.css";
 const WalletCheckerTool = ({ setIsNavLoading }) => {
   const projects = [
     {
-      name: "Chog",
-      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreiguhll5qwfac6x36v362nv2mhgl7so45dd262zpulwq7c4tfwbedq",
-      twitter: "https://x.com/ChogNFT",
-      discord: "https://discord.gg/chog",
+      name: "Monapes_Club",
+      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreieqbllwhoxctps4b7piupahl4hwuy6efzjwf7pbezylz7czrf26ku",
+      twitter: "https://x.com/MonapesClub_xyz",
+      discord: "http://discord.gg/v7aEegVQ",
     },
-    {
-      name: "PurpleFrens",
-      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreiguhll5qwfac6x36v362nv2mhgl7so45dd262zpulwq7c4tfwbedq",
-      twitter: "https://x.com/MonadPad",
-      discord: "https://discord.com/invite/mpad",
-    },
-    {
-      name: "Skrumpets",
-      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreiguhll5qwfac6x36v362nv2mhgl7so45dd262zpulwq7c4tfwbedq",
-      twitter: "https://x.com/skrumpeys",
-      discord: "https://discord.gg/chog",
-    },
-    {
-      name: "Spicky",
-      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreiguhll5qwfac6x36v362nv2mhgl7so45dd262zpulwq7c4tfwbedq",
-      twitter: "https://x.com/spikynads",
-      discord: "https://discord.gg/spikynads",
-    },
+   
   ];
 
   const [selectedProjects, setSelectedProjects] = useState([]);
@@ -164,15 +147,25 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
       setIsLoading(false);
     }
   };
-
+  
   const handleShare = () => {
     const photoLink = "https://octonads.com/eligibility-photo.jpg";
-    const eligibleProjects = Object.keys(eligibilityResults).filter((p) => eligibilityResults[p].isEligible);
-    const tweetText = eligibleProjects.length > 0
-      ? `I am eligible for ${eligibleProjects.join(", ")} to mint. Check yours at octonads.com! ${photoLink}`
-      : `Checked my wallet eligibility at octonads.com! Try it out! ${photoLink}`;
+    const getTwitterUsername = (twitterUrl) => {
+      if (!twitterUrl) return null;
+      const parts = twitterUrl.split('/');
+      const username = parts[parts.length - 1];
+      return `@${username}`;
+    };
+    const eligibleUsernames = Object.entries(eligibilityResults)
+      .filter(([_, result]) => result.isEligible)
+      .map(([_, result]) => getTwitterUsername(result.twitter))
+      .filter(username => username !== null);
+    const tweetText = eligibleUsernames.length > 0
+      ? `I am eligible for ${eligibleUsernames.join(", ")} to mint.\n\nCheck yours at https://octotools.xyz/\n\nTool by @OctoNads\n\n${photoLink}`
+      : `Checked my wallet eligibility at https://octotools.xyz/! Try it out!\n\n${photoLink}`;
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, "_blank");
   };
+
 
   const handleReset = () => {
     setSelectedProjects([]);

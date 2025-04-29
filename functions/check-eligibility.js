@@ -2,20 +2,8 @@ const axios = require('axios');
 
 const projects = [
   {
-    name: "Chog",
-    url: "https://script.google.com/macros/s/AKfycbyuD_LCQTABGv_W0E0lb8E0BrHYYHLLTm1wS0ps_hBpHFIQrIWf_ym9v7CsePpasQPeAw/exec",
-  },
-  {
-    name: "PurpleFrens",
-    url: "https://script.google.com/macros/s/AKfycbxBQpisQiA2I7DnnaMmgWv-tRKOVqGsAay1cZNcE_cL1pT0CybsKj9zLziR38urY2Vvqg/exec",
-  },
-  {
-    name: "Skrumpets",
-    url: "https://script.google.com/macros/s/AKfycbxZv1NjZ-XSelDJU5fUvru5PwbKGlNdV0ikVflg51a-9YX-__dn1qtYO6Y6QBdRdc7Y0g/exec",
-  },
-  {
-    name: "Spicky",
-    url: "https://script.google.com/macros/s/AKfycbwB6fzFYLG3X7hV0IyC_UUWqkL7DgKghlcunbgjcjOg5DoSjOs4c624JzVlJuxKq0dp/exec",
+    name: "Monapes_Club",
+    url: "https://script.google.com/macros/s/AKfycbwYRSRGXP_sh1jICeo_lRdg2gfu37TAUjgkG4cMZNPWva_jELg2ltiWWcoQdFo-GPr5ww/exec",
   },
 ];
 
