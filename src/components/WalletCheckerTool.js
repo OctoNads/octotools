@@ -4,12 +4,20 @@ import "../App.css";
 const WalletCheckerTool = ({ setIsNavLoading }) => {
   const projects = [
     {
+      name: "MonadSealsNft",
+      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreieceppvcddmevg22pidzhrxyxf4iqmnbtzcew5dvgm47phsgvxfke",
+      twitter: "https://x.com/MonadSealsNFT",
+      discord: "https://discord.com/invite/monadseals",
+    },
+
+    {
       name: "Monapes_Club",
       logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreieqbllwhoxctps4b7piupahl4hwuy6efzjwf7pbezylz7czrf26ku",
       twitter: "https://x.com/MonapesClub_xyz",
       discord: "http://discord.gg/v7aEegVQ",
     },
    
+    
   ];
 
   const [selectedProjects, setSelectedProjects] = useState([]);

@@ -2,9 +2,15 @@ const axios = require('axios');
 
 const projects = [
   {
+    name: "MonadSealsNft",
+    url: "https://script.google.com/macros/s/AKfycbzoo-qjyqZwJMDtvqv80j2x2wRMNGZOSqf0zpV5gb8LBG1WrnJtuyEiZRdXZJMsAWLa/exec",
+  },
+  {
     name: "Monapes_Club",
     url: "https://script.google.com/macros/s/AKfycbwYRSRGXP_sh1jICeo_lRdg2gfu37TAUjgkG4cMZNPWva_jELg2ltiWWcoQdFo-GPr5ww/exec",
   },
+  
+  
 ];
 
 exports.handler = async (event) => {
