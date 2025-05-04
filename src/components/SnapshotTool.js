@@ -2,11 +2,48 @@ import React, { useState, useEffect } from "react";
 import { jsPDF } from "jspdf";
 import "../App.css";
 
+// Static list of collections for search suggestions (derived from backend collectionMetadata)
+const collections = [
+  { name: "Molandaks Mint Pass", contractAddress: "0x6341c537a6fc563029d8e8caa87da37f227358f4" },
+  { name: "Purple Frens", contractAddress: "0xc5c9425d733b9f769593bd2814b6301916f91271" },
+  { name: "Chogs Mystery Chest", contractAddress: "0xe6b5427b174344fd5cb1e3d5550306b0055473c6" },
+  { name: "Skrumpets", contractAddress: "0xe8f0635591190fb626f9d13c49b60626561ed145" },
+  { name: "Spikes", contractAddress: "0x87E1F1824C9356733A25d6beD6b9c87A3b31E107" },
+  { name: "The10kSquad", contractAddress: "0x3A9454C1B4c84D1861BB1209a647C834d137b442" },
+  { name: "Sealuminati Testnetooor", contractAddress: "0x4870e911b1986c6822a171cdf91806c3d44ce235" },
+  { name: "Beannad", contractAddress: "0xb03b60818fd7f391e2e02c2c41a61cff86e4f3f5" },
+  { name: "TheDaks", contractAddress: "0x78ed9a576519024357ab06d9834266a04c9634b7" },
+  { name: "Chewy", contractAddress: "0x88bbcba96a52f310497774e7fd5ebadf0ece21fb" },
+  { name: "r3tards", contractAddress: "0xed52e0d80f4e7b295df5e622b55eff22d262f6ed" },
+  { name: "Exo Spirits", contractAddress: "0x89431f71352afb1f62637556224203460751957e" },
+  { name: "Mop Nads", contractAddress: "0xb600de0ebee70af4691dbf8a732be7791b6ce73a" },
+  { name: "Moyakinads", contractAddress: "0xd22385e223eff3b3b30a74874055b260a287a592" },
+  { name: "Mutated Monadsters", contractAddress: "0x7ea266cf2db3422298e28b1c73ca19475b0ad345" },
+  { name: "the billies", contractAddress: "0xaebd98e511b79fc5314910187cc18e9abf15808f" },
+  { name: "LaMouchNFT", contractAddress: "0x800f8cacc990dda9f4b3f1386c84983ffb65ce94" },
+  { name: "Monshape Hopium", contractAddress: "0x69f2688abe5dcde0e2413f77b80efcc16361a56e" },
+  { name: "C Family", contractAddress: "0x42ebb45dbfb74d7aedbddc524cad36e08b4c0022" },
+  { name: "Monad Nomads", contractAddress: "0x9ac5998884cf59d8a87dfc157560c1f0e1672e04" },
+  { name: "Mondana Baddies Eye Chain", contractAddress: "0xd6421e9c72199e971e5a3cde09214054e1216cd2" },
+  { name: "BOBR", contractAddress: "0x3ff5ab5eea49d25ab00b532e9e50b17d5218068c" },
+  { name: "Molandaks", contractAddress: "0x66e40f67afd710386379a6bb24d00308f81c183f" },
+  { name: "Meowwnads", contractAddress: "0xa568cabe34c8ca0d2a8671009ae0f6486a314425" },
+  { name: "Mecha Box Mint Pass", contractAddress: "0x3db6c11474893689cdb9d7cdedc251532cadf32b" },
+  { name: "Lil Chogstars", contractAddress: "0x26c86f2835c114571df2b6ce9ba52296cc0fa6bb" },
+  { name: "Overnads: Whitelist Pass", contractAddress: "0x49d54cd9ca8c5ecadbb346dc6b4e31549f34e405" },
+  { name: "SLMND Genesis", contractAddress: "0xf7b984c089534ff656097e8c6838b04c5652c947" },
+  { name: "OCTONADS OCTOG PASS", contractAddress: "0xce49fc8ad0618931265a7cc6d859649af92a9d03" },
+];
+
 const SnapshotTool = ({ setIsNavLoading }) => {
+  const [searchInput, setSearchInput] = useState("");
   const [contractAddress, setContractAddress] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
   const [minNFTs, setMinNFTs] = useState("");
   const [holderCount, setHolderCount] = useState("");
   const [result, setResult] = useState([]);
+  const [filteredResult, setFilteredResult] = useState([]);
+  const [holderSearch, setHolderSearch] = useState("");
   const [collectionMetadata, setCollectionMetadata] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [accessGranted, setAccessGranted] = useState(false);
@@ -64,6 +101,41 @@ const SnapshotTool = ({ setIsNavLoading }) => {
     const interval = setInterval(moveFloatingTexts, 5000);
     return () => clearInterval(interval);
   }, []);
+
+  // Handle search input and suggestions
+  const handleSearchInput = (e) => {
+    const value = e.target.value;
+    setSearchInput(value);
+    setContractAddress(""); // Clear contract address until a suggestion is selected
+
+    if (value.length > 0) {
+      const filteredSuggestions = collections.filter((collection) =>
+        collection.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setSuggestions(filteredSuggestions);
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  // Handle suggestion selection
+  const handleSuggestionClick = (collection) => {
+    setSearchInput(collection.name);
+    setContractAddress(collection.contractAddress);
+    setSuggestions([]);
+  };
+
+  // Handle holder search
+  useEffect(() => {
+    if (holderSearch) {
+      const filtered = result.filter((holder) =>
+        holder.ownerAddress.toLowerCase().includes(holderSearch.toLowerCase())
+      );
+      setFilteredResult(filtered);
+    } else {
+      setFilteredResult(result);
+    }
+  }, [holderSearch, result]);
 
   // Handle access submission
   const handleAccessSubmit = (e) => {
@@ -125,9 +197,34 @@ const SnapshotTool = ({ setIsNavLoading }) => {
   // Handle form submission
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    if (!/^0x[a-fA-F0-9]{40}$/.test(contractAddress)) {
+    let addressToFetch = contractAddress;
+
+    // If no contract address is set (i.e., no suggestion selected), check if input is a valid address
+    if (!addressToFetch) {
+      if (/^0x[a-fA-F0-9]{40}$/.test(searchInput)) {
+        addressToFetch = searchInput;
+      } else {
+        // Try to find a collection by name
+        const matchedCollection = collections.find(
+          (collection) => collection.name.toLowerCase() === searchInput.toLowerCase()
+        );
+        if (matchedCollection) {
+          addressToFetch = matchedCollection.contractAddress;
+        } else {
+          setHolderCount("");
+          setResult([]);
+          setFilteredResult([]);
+          setCollectionMetadata(null);
+          setFetchError("Invalid contract address or collection name.");
+          return;
+        }
+      }
+    }
+
+    if (!/^0x[a-fA-F0-9]{40}$/.test(addressToFetch)) {
       setHolderCount("");
       setResult([]);
+      setFilteredResult([]);
       setCollectionMetadata(null);
       setFetchError("Invalid contract address format.");
       return;
@@ -147,6 +244,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
     setFetchError("");
     setHolderCount("");
     setResult([]);
+    setFilteredResult([]);
     setCollectionMetadata(null);
 
     setTimeout(() => {
@@ -154,11 +252,12 @@ const SnapshotTool = ({ setIsNavLoading }) => {
     }, 5000);
 
     try {
-      const { holders, metadata } = await fetchAllNFTHolders(contractAddress);
+      const { holders, metadata } = await fetchAllNFTHolders(addressToFetch);
       if (holders.length > 0) {
         const filteredHolders = filterHolders(holders, minNFTsValue);
         setHolderCount(`Number of Holders holding at least ${minNFTs || 1} NFT(s): ${filteredHolders.length}`);
         setResult(filteredHolders);
+        setFilteredResult(filteredHolders);
         setCollectionMetadata(metadata);
         if ("Notification" in window && Notification.permission === "granted") {
           new Notification("Fetching Completed", {
@@ -169,6 +268,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
       } else {
         setHolderCount("Number of holders: 0");
         setResult([]);
+        setFilteredResult([]);
         setCollectionMetadata(null);
         setShowCompletion(true);
       }
@@ -181,16 +281,20 @@ const SnapshotTool = ({ setIsNavLoading }) => {
 
   // Reset form
   const handleReset = () => {
+    setSearchInput("");
     setContractAddress("");
+    setSuggestions([]);
     setMinNFTs("");
     setHolderCount("");
     setResult([]);
+    setFilteredResult([]);
+    setHolderSearch("");
     setCollectionMetadata(null);
     setFetchError("");
   };
 
   const handleDownload = () => {
-    const addresses = result.map((holder) => holder.ownerAddress).filter((addr) => addr);
+    const addresses = filteredResult.map((holder) => holder.ownerAddress).filter((addr) => addr);
     if (addresses.length === 0) {
       alert("No holders to download.");
       return;
@@ -240,16 +344,31 @@ const SnapshotTool = ({ setIsNavLoading }) => {
           )}
           
           <form onSubmit={handleFormSubmit}>
-            <label htmlFor="contractAddress">NFT Contract Address:</label>
-            <input
-              type="text"
-              id="contractAddress"
-              value={contractAddress}
-              onChange={(e) => setContractAddress(e.target.value)}
-              placeholder="e.g., 0x..."
-              required
-              aria-required="true"
-            />
+            <label htmlFor="searchInput">NFT Collection Name or Contract Address:</label>
+            <div className="suggestion-container">
+              <input
+                type="text"
+                id="searchInput"
+                value={searchInput}
+                onChange={handleSearchInput}
+                placeholder="e.g., Molandaks Mint Pass or 0x..."
+                required
+                aria-required="true"
+              />
+              {suggestions.length > 0 && (
+                <ul className="suggestion-list">
+                  {suggestions.map((collection, index) => (
+                    <li
+                      key={index}
+                      className="suggestion-item"
+                      onClick={() => handleSuggestionClick(collection)}
+                    >
+                      {collection.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
             <label htmlFor="minNFTs">Minimum NFTs (optional, default is 1):</label>
             <input
               type="number"
@@ -327,17 +446,34 @@ const SnapshotTool = ({ setIsNavLoading }) => {
             {isLoading ? (
               <div className="spinner"></div>
             ) : result.length > 0 ? (
-              Array.isArray(result) && result[0].ownerAddress ? (
-                <ul>
-                  {result.map((holder, index) => (
-                    <li key={index}>
-                      {holder.ownerAddress} - Amount: {holder.amount}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p>{result[0]}</p>
-              )
+              <>
+                <div className="holder-search-container">
+                  <label htmlFor="holderSearch">Search Holders:</label>
+                  <input
+                    type="text"
+                    id="holderSearch"
+                    className="holder-search-input"
+                    value={holderSearch}
+                    onChange={(e) => setHolderSearch(e.target.value)}
+                    placeholder="Enter holder address..."
+                  />
+                </div>
+                {Array.isArray(filteredResult) && filteredResult[0]?.ownerAddress ? (
+                  filteredResult.length > 0 ? (
+                    <ul>
+                      {filteredResult.map((holder, index) => (
+                        <li key={index}>
+                          {holder.ownerAddress} - Amount: {holder.amount}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p>No holders match your search.</p>
+                  )
+                ) : (
+                  <p>{filteredResult[0]}</p>
+                )}
+              </>
             ) : (
               <p>Holders will appear here...</p>
             )}
@@ -353,7 +489,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
               <option value="pdf">PDF</option>
               <option value="xml">XML</option>
             </select>
-            <button onClick={handleDownload} disabled={!result.length || isLoading}>
+            <button onClick={handleDownload} disabled={!filteredResult.length || isLoading}>
               Download
             </button>
           </div>

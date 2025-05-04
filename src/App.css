@@ -1,3 +1,4 @@
+/* Root variables for consistent theming */
 :root {
   --background-color: #37287c;
   --text-color: #fff;
@@ -7,12 +8,14 @@
   --button-hover: #37287c;
 }
 
+/* Dark mode variables */
 body.dark-mode {
   --background-color: #5941c1;
   --text-color: #fff;
   --button-bg: #170a4b;
 }
 
+/* Global styles */
 html,
 body {
   width: 100%;
@@ -30,6 +33,7 @@ body {
   -webkit-filter: blur(5px);
 }
 
+/* Sticky header */
 .sticky-header {
   position: fixed;
   top: 0;
@@ -107,6 +111,7 @@ body {
   color: var(--button-text);
 }
 
+/* Landing container */
 .landing-container {
   max-width: 800px;
   width: 100%;
@@ -149,6 +154,7 @@ body {
   -webkit-transform: translateY(-2px);
 }
 
+/* Main container */
 .container {
   position: relative;
   z-index: 2;
@@ -460,6 +466,7 @@ footer {
   -webkit-transform: scale(1.15);
 }
 
+/* Checker container */
 .checker-container {
   position: relative;
   z-index: 2;
@@ -575,7 +582,7 @@ footer {
 
 .checker-card-scroll {
   max-height: 420px;
-  overflow-y: auto;
+  overflow: auto;
   margin-bottom: 20px;
   width: 100%;
   box-sizing: border-box;
@@ -613,6 +620,7 @@ footer {
   height: 160px;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border 0.3s ease, background-color 0.3s ease;
   cursor: pointer;
+  overflow: hidden;
 }
 
 .checker-project-card:hover {
@@ -630,24 +638,109 @@ footer {
   display: none;
 }
 
+.checker-project-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+}
+
 .checker-project-card img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  margin-top: 8px;
   object-fit: cover;
+  margin-bottom: 8px;
 }
 
 .checker-project-card h3 {
   font-size: 13px;
   color: #fff;
-  margin: 8px 0 0 0;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   max-width: 100%;
-  font-weight: 500;
+  font-weight: bolder;
+}
+
+.checker-social-links {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 10px;
+ 
+}
+
+.checker-social-links .checker-spacer {
+  flex: 1;
+}
+
+.checker-project-social-logo {
+  font-size: 20px;
+  color: #fff;
+  transition: transform 0.2s ease;
+  -webkit-transition: transform 0.2s ease;
+ margin: -13px;
+}
+
+.checker-project-social-logo:hover {
+  transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+}
+
+/* Blur effect for sold-out card content */
+.sold-out .checker-project-content,
+.sold-out .checker-social-links {
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+/* Sold out overlay */
+.sold-out-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Sold out text with blur effect */
+.sold-out-text {
+  position: relative;
+  color: #ff4d4d;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 4px 8px;
+  z-index: 2;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.sold-out-text::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(2px);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+@supports (backdrop-filter: blur(2px)) {
+  .sold-out-text {
+    background-color: transparent;
+  }
 }
 
 .selected-projects {
@@ -740,27 +833,15 @@ footer {
   justify-content: flex-end;
 }
 
-.checker-social-links {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0 6px;
-  margin-bottom: 6px;
-}
-
-.checker-social-links .checker-spacer {
-  flex: 1;
-}
-
-.checker-social-logo {
+.checker-result-social-logo {
   font-size: 20px;
   color: #fff;
   transition: transform 0.2s ease;
   -webkit-transition: transform 0.2s ease;
-  margin-right: 5px;
+  margin-right: 12px;
 }
 
-.checker-social-logo:hover {
+.checker-result-social-logo:hover {
   transform: scale(1.15);
   -webkit-transform: scale(1.15);
 }
@@ -894,28 +975,7 @@ footer {
   color: #ccc;
 }
 
-@media (max-width: 600px) {
-
-  .eligibility-summary-container {
-    font-size: 14px;
-  }
-
-  .eligibility-list {
-    max-height: 150px;
-    padding: 8px;
-  }
-
-  .eligibility-item {
-    font-size: 13px;
-  }
-
-  .close {
-    font-size: 20px;
-    top: 8px;
-    right: 10px;
-  }
-}
-
+/* Media queries for responsiveness */
 @media (max-width: 768px) {
   .container {
     margin: 60px auto 20px;
@@ -971,6 +1031,29 @@ footer {
   .social-icons {
     display: flex;
     justify-content: center;
+  }
+
+  .checker-project-card {
+    width: 120px;
+    height: 150px;
+  }
+
+  .checker-project-card img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .checker-project-card h3 {
+    font-size: 12px;
+  }
+
+  .checker-project-social-logo {
+    font-size: 18px;
+  }
+
+  .sold-out-text {
+    font-size: 14px;
+    padding: 3px 6px;
   }
 }
 
@@ -1040,6 +1123,25 @@ footer {
   .checker-result-item-content h3 {
     font-size: 13px;
   }
+
+  .eligibility-summary-container {
+    font-size: 14px;
+  }
+
+  .eligibility-list {
+    max-height: 150px;
+    padding: 8px;
+  }
+
+  .eligibility-item {
+    font-size: 13px;
+  }
+
+  .close {
+    font-size: 20px;
+    top: 8px;
+    right: 10px;
+  }
 }
 
 @media (max-width: 400px) {
@@ -1104,21 +1206,23 @@ footer {
   .checker-project-card img {
     width: 70px;
     height: 70px;
-    margin-top: 6px;
   }
 
   .checker-project-card h3 {
     font-size: 12px;
-    margin: 6px 0 0 0;
   }
 
   .checker-social-links {
     padding: 0 4px;
-    margin-bottom: 4px;
   }
 
-  .checker-social-logo {
+  .checker-project-social-logo {
     font-size: 16px;
+  }
+
+  .sold-out-text {
+    font-size: 12px;
+    padding: 2px 4px;
   }
 
   .checker-result-header {
@@ -1160,4 +1264,59 @@ footer {
   #checker-download-options {
     max-width: 100%;
   }
+}
+
+/* Suggestion dropdown */
+.suggestion-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+
+.suggestion-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #6541d2;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px var(--shadow-color);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 10;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.suggestion-item {
+  padding: 10px;
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+  -webkit-transition: background-color 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background-color: var(--button-hover);
+}
+
+/* Holder search input */
+.holder-search-container {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.holder-search-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  font-size: 14px;
+  background-color: #ffffff;
+  color: #000;
 }

@@ -2,23 +2,22 @@ import React, { useState, useEffect } from "react";
 import "../App.css";
 
 const WalletCheckerTool = ({ setIsNavLoading }) => {
-  const projects = [
+  const [projects] = useState([
     {
       name: "MonadSealsNft",
       logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreieceppvcddmevg22pidzhrxyxf4iqmnbtzcew5dvgm47phsgvxfke",
       twitter: "https://x.com/MonadSealsNFT",
       discord: "https://discord.com/invite/monadseals",
+      isSoldOut: true,
     },
-
     {
-      name: "Monapes_Club",
+      name: "MonTest",
       logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreieqbllwhoxctps4b7piupahl4hwuy6efzjwf7pbezylz7czrf26ku",
       twitter: "https://x.com/MonapesClub_xyz",
       discord: "http://discord.gg/v7aEegVQ",
+      isSoldOut: true,
     },
-   
-    
-  ];
+  ]);
 
   const [selectedProjects, setSelectedProjects] = useState([]);
   const [walletAddress, setWalletAddress] = useState("");
@@ -51,8 +50,8 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
     setFloatingTextStyles(initialStyles);
 
     const moveFloatingTexts = () => {
-      const textWidth = 150; // Approximate width for text at 24px
-      const textHeight = 30; // Approximate height
+      const textWidth = 150;
+      const textHeight = 30;
       const maxX = window.innerWidth - textWidth;
       const maxY = window.innerHeight - textHeight;
       const newStyles = floatingTexts.map(() => ({
@@ -85,6 +84,8 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
   };
 
   const handleProjectSelection = (projectName) => {
+    const project = projects.find((p) => p.name === projectName);
+    if (project.isSoldOut) return;
     setSelectedProjects((prev) =>
       prev.includes(projectName) ? prev.filter((p) => p !== projectName) : [...prev, projectName]
     );
@@ -124,10 +125,12 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
 
       const data = await response.json();
       const enrichedResults = Object.fromEntries(
-        Object.entries(data).map(([project, isEligible]) => [
+        Object.entries(data).map(([project, result]) => [
           project,
           {
-            isEligible,
+            isEligible: result.eligible,
+            phase: result.phase,
+            isSoldOut: projects.find((p) => p.name === project)?.isSoldOut,
             logo: projects.find((p) => p.name === project)?.logo,
             twitter: projects.find((p) => p.name === project)?.twitter,
             discord: projects.find((p) => p.name === project)?.discord,
@@ -138,8 +141,8 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
       setEligibilityResults(enrichedResults);
 
       const eligibleProjects = Object.entries(data)
-        .filter(([_, isEligible]) => isEligible)
-        .map(([projectName]) => projectName);
+        .filter(([_, result]) => result.eligible)
+        .map(([projectName, result]) => `${projectName} (${result.phase})`);
 
       if ("Notification" in window && Notification.permission === "granted") {
         new Notification("Eligibility Check Completed", {
@@ -155,7 +158,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
       setIsLoading(false);
     }
   };
-  
+
   const handleShare = () => {
     const photoLink = "https://octotools.xyz/";
     const getTwitterUsername = (twitterUrl) => {
@@ -174,7 +177,6 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, "_blank");
   };
 
-
   const handleReset = () => {
     setSelectedProjects([]);
     setWalletAddress("");
@@ -192,7 +194,6 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", position: "relative" }}>
       <div className={accessGranted ? "" : "blur-content"}>
-       
         <div className="checker-container">
           {fetchError && <div className="checker-error">{fetchError}</div>}
           <form className="checker-form" onSubmit={handleSearch}>
@@ -212,29 +213,37 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
                   filteredProjects.map((project) => (
                     <div
                       key={project.name}
-                      className="checker-project-card"
+                      className={`checker-project-card ${project.isSoldOut ? 'sold-out' : ''}`}
                       onClick={() => handleProjectSelection(project.name)}
                     >
-                      <img src={project.logo} alt={`${project.name} Logo`} />
-                      <h3>{project.name}</h3>
-                      <div className="checker-social-links">
-                        {project.twitter && (
-                          <a href={project.twitter} target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-twitter checker-social-logo" aria-label="Twitter"></i>
-                          </a>
-                        )}
-                        <div className="checker-spacer"></div>
-                        {project.discord && (
-                          <a href={project.discord} target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-discord checker-social-logo" aria-label="Discord"></i>
-                          </a>
-                        )}
+                      <div className="checker-project-content">
+                        <img src={project.logo} alt={`${project.name} Logo`} />
+                        <h3>{project.name}</h3>
+                        <div className="checker-social-links">
+                          {project.twitter && (
+                            <a href={project.twitter} target="_blank" rel="noopener noreferrer">
+                              <i className="fab fa-twitter checker-project-social-logo" aria-label="Twitter"></i>
+                            </a>
+                          )}
+                          <div className="checker-spacer"></div>
+                          {project.discord && (
+                            <a href={project.discord} target="_blank" rel="noopener noreferrer">
+                              <i className="fab fa-discord checker-project-social-logo" aria-label="Discord"></i>
+                            </a>
+                          )}
+                        </div>
+                        <input
+                          type="checkbox"
+                          checked={selectedProjects.includes(project.name)}
+                          onChange={() => handleProjectSelection(project.name)}
+                          disabled={project.isSoldOut}
+                        />
                       </div>
-                      <input
-                        type="checkbox"
-                        checked={selectedProjects.includes(project.name)}
-                        onChange={() => handleProjectSelection(project.name)}
-                      />
+                      {project.isSoldOut && (
+                        <div className="sold-out-overlay">
+                          <div className="sold-out-text">Minted Out</div>
+                        </div>
+                      )}
                     </div>
                   ))
                 ) : (
@@ -293,17 +302,18 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
                     <img src={result.logo} alt={`${project} Logo`} />
                     <div className="checker-result-item-content">
                       <h3>
-                        {project}: {result.isEligible ? "Eligible" : "Not Eligible"}
+                        {project}: {result.isEligible ? `Your Wallet Eligible in ${result.phase} phase` : "Not Eligible"}
+                        {result.isSoldOut && <span style={{ color: 'red', marginLeft: '10px' }}>Sold Out</span>}
                       </h3>
                       <div className="checker-social-links">
                         {result.twitter && (
                           <a href={result.twitter} target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-twitter checker-social-logo" aria-label="Twitter"></i>
+                            <i className="fab fa-twitter checker-result-social-logo" aria-label="Twitter"></i>
                           </a>
                         )}
                         {result.discord && (
                           <a href={result.discord} target="_blank" rel="noopener noreferrer">
-                            <i className="fab fa-discord checker-social-logo" aria-label="Discord"></i>
+                            <i className="fab fa-discord checker-result-social-logo" aria-label="Discord"></i>
                           </a>
                         )}
                       </div>
@@ -382,7 +392,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
                     key={project}
                     className={`eligibility-item ${result.isEligible ? "eligible" : "not-eligible"}`}
                   >
-                    <span>{project}</span>: {result.isEligible ? "Eligible" : "Not Eligible"}
+                    <span>{project}</span>: {result.isEligible ? `Eligible in ${result.phase} phase` : "Not Eligible"}
                   </div>
                 ))}
               </div>

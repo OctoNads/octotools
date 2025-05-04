@@ -6,11 +6,10 @@ const projects = [
     url: "https://script.google.com/macros/s/AKfycbzoo-qjyqZwJMDtvqv80j2x2wRMNGZOSqf0zpV5gb8LBG1WrnJtuyEiZRdXZJMsAWLa/exec",
   },
   {
-    name: "Monapes_Club",
-    url: "https://script.google.com/macros/s/AKfycbwYRSRGXP_sh1jICeo_lRdg2gfu37TAUjgkG4cMZNPWva_jELg2ltiWWcoQdFo-GPr5ww/exec",
+    name: "MonTest",
+    url: "https://script.google.com/macros/s/AKfycbw05PZByqqQoVudP-YK7js19hIdDvgZXS6MbTvWpqvVYEGo79s5vlfXrphu4oaFYbu9/exec",
   },
-  
-  
+  // Add other projects here as needed
 ];
 
 exports.handler = async (event) => {
@@ -46,12 +45,17 @@ exports.handler = async (event) => {
   try {
     const projectChecks = projectNames.map(async (name) => {
       const project = projects.find((p) => p.name === name);
-      if (!project) return { [name]: false };
+      if (!project) return { [name]: { eligible: false } };
 
       const url = `${project.url}?wallet=${encodeURIComponent(walletAddress)}`;
-      const response = await axios.get(url, { timeout: 10000 });
-      const data = response.data;
-      return { [name]: data.eligible === true };
+      try {
+        const response = await axios.get(url, { timeout: 10000 });
+        const data = response.data;
+        return { [name]: { eligible: data.eligible, phase: data.phase || null } };
+      } catch (error) {
+        console.error(`Error checking ${name}:`, error.message);
+        return { [name]: { eligible: false } };
+      }
     });
 
     const results = await Promise.all(projectChecks);
@@ -59,7 +63,7 @@ exports.handler = async (event) => {
 
     // Ensure all requested projectNames are in the response
     projectNames.forEach((name) => {
-      if (!(name in eligibility)) eligibility[name] = false;
+      if (!(name in eligibility)) eligibility[name] = { eligible: false };
     });
 
     return {
