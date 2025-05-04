@@ -4,6 +4,13 @@ import "../App.css";
 const WalletCheckerTool = ({ setIsNavLoading }) => {
   const [projects] = useState([
     {
+      name: "Monadoon",
+      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreigu6pcflmwhz5r3dh2ozponoiqissujiyjnakp5g7r2hfp666fj2i",
+      twitter: "https://x.com/Monadoons",
+      discord: "https://discord.com/invite/monadoon",
+      isSoldOut: false,
+    },
+    {
       name: "MonadSealsNft",
       logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreieceppvcddmevg22pidzhrxyxf4iqmnbtzcew5dvgm47phsgvxfke",
       twitter: "https://x.com/MonadSealsNFT",
@@ -11,7 +18,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
       isSoldOut: true,
     },
     {
-      name: "MonTest",
+      name: "MonApesClub",
       logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreieqbllwhoxctps4b7piupahl4hwuy6efzjwf7pbezylz7czrf26ku",
       twitter: "https://x.com/MonapesClub_xyz",
       discord: "http://discord.gg/v7aEegVQ",
