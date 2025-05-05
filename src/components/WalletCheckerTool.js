@@ -387,7 +387,6 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
           <div className="modal-content">
             <span className="close" onClick={() => setShowCompletion(false)}>×</span>
             <h2>Eligibility Check Completed</h2>
-            <p>Wallet eligibility has been successfully checked!</p>
             <div className="eligibility-summary-container">
               <p>
                 Eligible for {Object.values(eligibilityResults).filter((r) => r.isEligible).length} out of{" "}
