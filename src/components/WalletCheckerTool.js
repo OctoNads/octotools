@@ -4,6 +4,13 @@ import "../App.css";
 const WalletCheckerTool = ({ setIsNavLoading }) => {
   const [projects] = useState([
     {
+      name: "Chilpys",
+      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreigl3qooozgkz7by5kg7h2cjumd5wswcdobgiucgo5ixajmll3rwia",
+      twitter: "https://x.com/chilpys?s=21",
+      discord: "",
+      isSoldOut: false,
+    },
+    {
       name: "Monadoon",
       logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreigu6pcflmwhz5r3dh2ozponoiqissujiyjnakp5g7r2hfp666fj2i",
       twitter: "https://x.com/Monadoons",
@@ -266,7 +273,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
               </div>
             )}
             <label className="checker-label" htmlFor="checker-wallet-address">
-              Monad Wallet Address:
+              Wallet Address:
             </label>
             <input
               type="text"

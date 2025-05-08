@@ -21,7 +21,7 @@ function App() {
   };
 
   const title = location.pathname === "/snapshot" ? "SNAPSHOT TOOL" : location.pathname === "/wallet-checker" ? "WALLET CHECKER TOOL" : "";
-  const subheading = title ? "(Monad Testnet)" : "";
+  const subheading = title ? " " : "";
 
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", position: "relative" }}>
