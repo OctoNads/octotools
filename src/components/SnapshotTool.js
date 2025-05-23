@@ -223,7 +223,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
     }, 5000);
 
     try {
-      const { holders, metadata, totalHolders } = await fetchAllNFTHolders(addressToFetch);
+      const { holders, metadata } = await fetchAllNFTHolders(addressToFetch);
       if (holders.length > 0) {
         const filteredHolders = filterHolders(holders, minNFTsValue);
         setHolderCount(`Number of Holders holding at least ${minNFTs || 1} NFT(s): ${filteredHolders.length}`);
