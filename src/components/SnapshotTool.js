@@ -149,47 +149,20 @@ const SnapshotTool = ({ setIsNavLoading }) => {
     }
   };
 
-  // Fetch NFT holders from backend (single page)
-  const fetchNFTHolders = async (contractAddress, pageIndex = 1, pageSize = 10) => {
-    const url = `/api/holders?contractAddress=${encodeURIComponent(contractAddress)}&pageIndex=${pageIndex}&pageSize=${pageSize}`;
+  const fetchAllNFTHolders = async (contractAddress) => {
+    const url = `/api/holders?contractAddress=${encodeURIComponent(contractAddress)}&pageSize=100`; // Match backend pageSize
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-    return response.json();
-  };
-
-  // Fetch all NFT holders with pagination
-  const fetchAllNFTHolders = async (contractAddress, pageSize = 50) => {
-    let allHolders = [];
-    let metadata = null;
-    let pageIndex = 1;
-    const batchSize = 1;
-
-    try {
-      while (true) {
-        const fetchPromises = [];
-        for (let i = 0; i < batchSize && pageIndex + i <= 1000; i++) {
-          fetchPromises.push(fetchNFTHolders(contractAddress, pageIndex + i, pageSize));
-        }
-        const batchResults = await Promise.all(fetchPromises);
-        let hasMorePages = false;
-        for (const result of batchResults) {
-          if (!metadata) metadata = result.metadata;
-          allHolders.push(...result.holders);
-          if (result.total && allHolders.length < result.total) hasMorePages = true;
-          else if (result.holders.length === pageSize) hasMorePages = true;
-        }
-        pageIndex += batchSize;
-        if (!hasMorePages || fetchPromises.length < batchSize) break;
-      }
-      return { holders: allHolders, metadata };
-    } catch (error) {
-      throw new Error(`Failed to fetch holders: ${error.message}`);
+    const data = await response.json();
+    if (!data.holders || !Array.isArray(data.holders)) {
+      throw new Error('Invalid response: holders field missing or not an array');
     }
+    return { holders: data.holders, metadata: data.metadata, totalHolders: data.totalHolders };
   };
 
-  // Filter holders by minimum NFT count
+    // Filter holders by minimum NFT count
   const filterHolders = (holders, minNFTs) => {
     return holders.filter((holder) => Number(holder.amount) > minNFTs);
   };
@@ -199,12 +172,10 @@ const SnapshotTool = ({ setIsNavLoading }) => {
     e.preventDefault();
     let addressToFetch = contractAddress;
 
-    // If no contract address is set (i.e., no suggestion selected), check if input is a valid address
     if (!addressToFetch) {
       if (/^0x[a-fA-F0-9]{40}$/.test(searchInput)) {
         addressToFetch = searchInput;
       } else {
-        // Try to find a collection by name
         const matchedCollection = collections.find(
           (collection) => collection.name.toLowerCase() === searchInput.toLowerCase()
         );
@@ -252,7 +223,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
     }, 5000);
 
     try {
-      const { holders, metadata } = await fetchAllNFTHolders(addressToFetch);
+      const { holders, metadata, totalHolders } = await fetchAllNFTHolders(addressToFetch);
       if (holders.length > 0) {
         const filteredHolders = filterHolders(holders, minNFTsValue);
         setHolderCount(`Number of Holders holding at least ${minNFTs || 1} NFT(s): ${filteredHolders.length}`);
@@ -261,7 +232,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
         setCollectionMetadata(metadata);
         if ("Notification" in window && Notification.permission === "granted") {
           new Notification("Fetching Completed", {
-            body: "NFT holders have been successfully fetched!",
+            body: `Fetched ${filteredHolders.length} holders for the collection!`,
           });
         }
         setShowCompletion(true);
@@ -271,9 +242,10 @@ const SnapshotTool = ({ setIsNavLoading }) => {
         setFilteredResult([]);
         setCollectionMetadata(null);
         setShowCompletion(true);
+        setFetchError("No holders found for this contract address.");
       }
     } catch (error) {
-      setFetchError(error.message);
+      setFetchError(`Failed to fetch holders: ${error.message}`);
     } finally {
       setIsLoading(false);
     }
@@ -342,7 +314,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
               {fetchError}
             </div>
           )}
-          
+
           <form onSubmit={handleFormSubmit}>
             <label htmlFor="searchInput">NFT Collection Name or Contract Address:</label>
             <div className="suggestion-container">

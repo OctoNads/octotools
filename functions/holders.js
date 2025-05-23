@@ -10,8 +10,6 @@ const collectionMetadata = {
         twitter: "https://x.com/MonadPad",
         discord: "https://discord.com/invite/mpad"
     },
-
-
     "0xc5c9425d733b9f769593bd2814b6301916f91271": {
         name: "Purple Frens",
         supply: 1111,
@@ -21,8 +19,6 @@ const collectionMetadata = {
         twitter: "https://x.com/MonadPad",
         discord: "https://discord.com/invite/mpad"
     },
-
-
     "0xe6b5427b174344fd5cb1e3d5550306b0055473c6": {
         name: "Chogs Mystery Chest",
         supply: 888,
@@ -32,8 +28,6 @@ const collectionMetadata = {
         twitter: "https://x.com/ChogNFT",
         discord: "discord.gg/chog"
     },
-
-
     "0xe8f0635591190fb626f9d13c49b60626561ed145": {
         name: "Skrumpets",
         supply: 499,
@@ -43,8 +37,7 @@ const collectionMetadata = {
         twitter: "https://x.com/skrumpeys",
         discord: ""
     },
-
-    "0x87E1F1824C9356733A25d6beD6b9c87A3b31E107": {
+    "0x87e1f1824c9356733a25d6bed6b9c87a3b31e107": {
         name: "Spikes",
         supply: 3333,
         image: "https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fimg.reservoir.tools%2Fimages%2Fv2%2Fmonad-testnet%2Fi9YO%252F4yHXUdJsWcTqhqvf0aTPGa7dMbaoJpVINCUIuTbYpz%252FAM0ZI38bbmW5peeVIgH4fvhO%252Fqgc3c%252Bvqag4utIVFcylE0oHY%252Bz0sS4qeqGr1xW%252BSbXlJkImE0K8ke9V5W54iuvOLtY6FXTTK4A8kQ%253D%253D",
@@ -53,8 +46,7 @@ const collectionMetadata = {
         twitter: "https://x.com/spikynads",
         discord: "discord.gg/spikynads"
     },
-
-    "0x3A9454C1B4c84D1861BB1209a647C834d137b442": {
+    "0x3a9454c1b4c84d1861bb1209a647c834d137b442": {
         name: "The10kSquad",
         supply: 10000,
         image: "https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fimg.reservoir.tools%2Fimages%2Fv2%2Fmonad-testnet%2Fi9YO%252F4yHXUdJsWcTqhqvf3cccIjRlA2NlR5AuAKMCuuPw6WrNC2w%252FV%252Fb%252F2l32va1FLYKKZzNK1N%252BBGInMzwWfGUWGnEnuIOB5r5LBCPpPOZGk%252BE28yz5kFPiYiF13gS6",
@@ -63,9 +55,6 @@ const collectionMetadata = {
         twitter: "https://x.com/the10kSquad",
         discord: "discord.gg/the10ksquad"
     },
-
-
-
     "0x4870e911b1986c6822a171cdf91806c3d44ce235": {
         name: "Sealuminati Testnetooor",
         supply: 6669,
@@ -75,17 +64,15 @@ const collectionMetadata = {
         twitter: "https://x.com/sealuminati",
         discord: "https://discord.com/invite/VP5Tt5ccjb"
     },
-
     "0xb03b60818fd7f391e2e02c2c41a61cff86e4f3f5": {
         name: "Beannad",
-        supply: 5555,
+        vaccine: 5555,
         image: "https://img-cdn.magiceden.dev/rs:fill:400:0:0/plain/https%3A%2F%2Fimg.reservoir.tools%2Fimages%2Fv2%2Fmonad-testnet%2FUk7PUcY7rj0zEmx18j3mTRStUJ5XhZNvoIIe%252B2JzyFMbZGo4OpunCg3%252Bhf8I20M7KxAERmAU%252F%252BqcFGsb2uCLydnJGnA8dD3L4tKGCLpfW1fCq9I9aKFv%252Fl49TUTPmKz%252FUTDn2jqndIDapvxnM2YlXMhantTfQ66aRlOUgy5cGATyYEZ8YynclCbtndpwqJYsrs3xqeYiiuby1nhWBByRujdYnPBRy%252BRDZNmVxH3yGYGjK9okdu%252BUtu%252FIznGD560w%252BjSMlxh1FUFnd7nc371q3AvI2%252FNiR1Gqn8HBrtiMeAOFonkFXX9WCteojlTMiM3W",
         marketplaceLink: "https://magiceden.io/collections/monad-testnet/0xb03b60818fd7f391e2e02c2c41a61cff86e4f3f5?status=%22magic_eden%22",
         verified: true,
         twitter: "https://x.com/Bean_DEX",
         discord: "https://discord.com/invite/beanex"
     },
-
     "0x78ed9a576519024357ab06d9834266a04c9634b7": {
         name: "TheDaks",
         supply: 1550,
@@ -95,8 +82,6 @@ const collectionMetadata = {
         twitter: "https://x.com/thedaks_png",
         discord: "https://discord.com/invite/thedaks"
     },
-
-
     "0x88bbcba96a52f310497774e7fd5ebadf0ece21fb": {
         name: "Chewy",
         supply: 1222,
@@ -106,8 +91,6 @@ const collectionMetadata = {
         twitter: "https://x.com/Chewy_xyz",
         discord: "discord.gg/chewymonad"
     },
-
-
     "0xed52e0d80f4e7b295df5e622b55eff22d262f6ed": {
         name: "r3tards",
         supply: 333,
@@ -117,7 +100,6 @@ const collectionMetadata = {
         twitter: "",
         discord: ""
     },
-
     "0x89431f71352afb1f62637556224203460751957e": {
         name: "Exo Spirits",
         supply: 3333,
@@ -127,7 +109,6 @@ const collectionMetadata = {
         twitter: "https://x.com/ExoSpiritsNft",
         discord: ""
     },
-
     "0xb600de0ebee70af4691dbf8a732be7791b6ce73a": {
         name: "Mop Nads",
         supply: 9002,
@@ -137,10 +118,6 @@ const collectionMetadata = {
         twitter: "https://x.com/mopwtf",
         discord: ""
     },
-
-
-
-
     "0xd22385e223eff3b3b30a74874055b260a287a592": {
         name: "Moyakinads",
         supply: 444,
@@ -150,9 +127,6 @@ const collectionMetadata = {
         twitter: "https://x.com/MOYAKI_XYZ",
         discord: ""
     },
-
-
-
     "0x7ea266cf2db3422298e28b1c73ca19475b0ad345": {
         name: "Mutated Monadsters",
         supply: 222,
@@ -162,9 +136,6 @@ const collectionMetadata = {
         twitter: "https://x.com/Monadsters",
         discord: "discord.gg/monadsters"
     },
-
-
-
     "0xaebd98e511b79fc5314910187cc18e9abf15808f": {
         name: "the billies",
         supply: 3333,
@@ -174,9 +145,6 @@ const collectionMetadata = {
         twitter: "",
         discord: ""
     },
-
-
-
     "0x800f8cacc990dda9f4b3f1386c84983ffb65ce94": {
         name: "LaMouchNFT",
         supply: 10000,
@@ -186,9 +154,6 @@ const collectionMetadata = {
         twitter: "https://x.com/LaMouchNFT",
         discord: "discord.gg/lamouch"
     },
-
-
-
     "0x69f2688abe5dcde0e2413f77b80efcc16361a56e": {
         name: "Monshape Hopium",
         supply: 1111,
@@ -198,7 +163,6 @@ const collectionMetadata = {
         twitter: "https://x.com/Monshape",
         discord: "https://discord.com/invite/monshape"
     },
-
     "0x42ebb45dbfb74d7aedbddc524cad36e08b4c0022": {
         name: "C Family",
         supply: 300,
@@ -208,9 +172,6 @@ const collectionMetadata = {
         twitter: "https://x.com/csfmly",
         discord: "discord.gg/c-family"
     },
-
-
-
     "0x9ac5998884cf59d8a87dfc157560c1f0e1672e04": {
         name: "Monad Nomads",
         supply: 500,
@@ -220,9 +181,6 @@ const collectionMetadata = {
         twitter: "https://x.com/MonadNomadsNFT",
         discord: "discord.gg/monadnomads"
     },
-
-
-
     "0xd6421e9c72199e971e5a3cde09214054e1216cd2": {
         name: "Mondana Baddies Eye Chain",
         supply: 150,
@@ -232,7 +190,6 @@ const collectionMetadata = {
         twitter: "https://x.com/mondanabaddies",
         discord: ""
     },
-
     "0x3ff5ab5eea49d25ab00b532e9e50b17d5218068c": {
         name: "BOBR",
         supply: 777,
@@ -242,8 +199,6 @@ const collectionMetadata = {
         twitter: "https://x.com/Bober_xyz",
         discord: "discord.gg/rRe9AMUS"
     },
-
-
     "0x66e40f67afd710386379a6bb24d00308f81c183f": {
         name: "Molandaks",
         supply: 300,
@@ -253,7 +208,6 @@ const collectionMetadata = {
         twitter: "https://x.com/MonadPad",
         discord: "https://discord.com/invite/mpad"
     },
-
     "0xa568cabe34c8ca0d2a8671009ae0f6486a314425": {
         name: "Meowwnads",
         supply: 5000,
@@ -263,7 +217,6 @@ const collectionMetadata = {
         twitter: "https://x.com/meowwnads",
         discord: "discord.gg/meowwnads"
     },
-
     "0x3db6c11474893689cdb9d7cdedc251532cadf32b": {
         name: "Mecha Box Mint Pass",
         supply: 300,
@@ -273,7 +226,6 @@ const collectionMetadata = {
         twitter: "https://x.com/Chewy_xyz",
         discord: "discord.gg/chewymonad"
     },
-
     "0x26c86f2835c114571df2b6ce9ba52296cc0fa6bb": {
         name: "Lil Chogstars",
         supply: 131,
@@ -283,7 +235,6 @@ const collectionMetadata = {
         twitter: "https://x.com/chogstarrr",
         discord: "https://discord.com/invite/chogstars"
     },
-
     "0x49d54cd9ca8c5ecadbb346dc6b4e31549f34e405": {
         name: "Overnads: Whitelist Pass",
         supply: 178,
@@ -293,7 +244,6 @@ const collectionMetadata = {
         twitter: "https://x.com/overnads",
         discord: "https://discord.com/invite/overnads"
     },
-
     "0xf7b984c089534ff656097e8c6838b04c5652c947": {
         name: "SLMND Genesis",
         supply: 4200,
@@ -303,7 +253,6 @@ const collectionMetadata = {
         twitter: "https://x.com/slmndNFT",
         discord: ""
     },
-
     "0xce49fc8ad0618931265a7cc6d859649af92a9d03": {
         name: "OCTONADS OCTOG PASS",
         supply: 999,
@@ -316,7 +265,7 @@ const collectionMetadata = {
 };
 
 exports.handler = async (event) => {
-  const { contractAddress, pageIndex = 1, pageSize = 10 } = event.queryStringParameters || {};
+  const { contractAddress, pageSize = 100 } = event.queryStringParameters || {}; // Increase default pageSize
 
   if (!contractAddress) {
     return {
@@ -325,47 +274,83 @@ exports.handler = async (event) => {
     };
   }
 
-  const pageIndexNum = parseInt(pageIndex, 10);
   const pageSizeNum = parseInt(pageSize, 10);
-
-  if (isNaN(pageIndexNum) || isNaN(pageSizeNum) || pageIndexNum < 1 || pageSizeNum < 1) {
+  if (isNaN(pageSizeNum) || pageSizeNum < 1 || pageSizeNum > 1000) {
     return {
       statusCode: 400,
-      body: JSON.stringify({ error: 'Invalid pageIndex or pageSize' }),
+      body: JSON.stringify({ error: 'Invalid pageSize (must be between 1 and 100)' }),
     };
   }
 
   try {
-    const url = `https://api.blockvision.org/v2/monad/collection/holders?contractAddress=${encodeURIComponent(contractAddress)}&pageIndex=${pageIndexNum}&pageSize=${pageSizeNum}`;
-    console.log(`Fetching: ${url}`);
-    const response = await axios.get(url, {
-      headers: {
-        accept: 'application/json',
-        'x-api-key': process.env.API_KEY,
-      },
-      timeout: 10000,
+    const baseURL = 'https://monad-testnet.g.alchemy.com/nft/v2/GZmCJtp1FQLv4t2oYDeN2q1BkbruCPgb/getOwnersForCollection';
+    const params = new URLSearchParams({
+      contractAddress: encodeURIComponent(contractAddress),
+      withTokenBalances: 'true',
+      pageSize: pageSizeNum.toString(),
     });
+    let holders = [];
+    let pageKey = null;
+    let attemptCount = 0;
+    const maxAttempts = 10; // Prevent infinite loops
 
-    console.log(`Response code: ${response.data.code}, Result: ${JSON.stringify(response.data.result)}`);
-    if (response.data.code !== 0 || !response.data.result || !Array.isArray(response.data.result.data)) {
-      console.error('Invalid API response:', response.data);
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: response.data.message || 'Invalid API response' }),
-      };
-    }
+    do {
+      let url = `${baseURL}?${params.toString()}`;
+      if (pageKey) {
+        url += `&pageKey=${encodeURIComponent(pageKey)}`;
+      }
 
-    const holders = response.data.result.data;
+      console.log(`Fetching: ${url}`);
+      try {
+        const response = await axios.get(url, { timeout: 15000 }); // Increase timeout
+        if (response.status !== 200) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = response.data;
+        if (!data.ownerAddresses || !Array.isArray(data.ownerAddresses)) {
+          console.warn('Invalid API response: ownerAddresses field missing or not an array');
+          break; // Exit loop if no valid data
+        }
+
+        const pageHolders = data.ownerAddresses.map(owner => {
+          const amount = owner.tokenBalances?.reduce((sum, tb) => sum + parseInt(tb.balance, 10), 0) || 0;
+          return { ownerAddress: owner.ownerAddress, amount };
+        });
+
+        holders = holders.concat(pageHolders);
+        pageKey = data.pageKey || null;
+        attemptCount++;
+
+        // Add delay to avoid rate limiting
+        if (pageKey) {
+          await new Promise(resolve => setTimeout(resolve, 1000));
+        }
+
+      } catch (pageError) {
+        console.error(`Error fetching page ${pageKey || 'initial'}:`, pageError.message);
+        if (attemptCount >= maxAttempts) {
+          throw new Error('Max retry attempts reached for fetching holders');
+        }
+        // Retry after a delay
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      }
+
+    } while (pageKey && attemptCount < maxAttempts);
+
     const metadata = collectionMetadata[contractAddress.toLowerCase()] || null;
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ holders, metadata, total: response.data.result.total || holders.length }),
+      body: JSON.stringify({ holders, metadata, totalHolders: holders.length }),
     };
   } catch (error) {
-    console.error(`Error fetching holders for ${contractAddress}, page ${pageIndex}:`, error.message, error.response?.data);
+    console.error(`Error fetching holders for ${contractAddress}:`, error.message);
+    if (error.response) {
+      console.error('API Error Response:', JSON.stringify(error.response.data));
+    }
     return {
-      statusCode: error.response?.status || 500,
+      statusCode: 500,
       body: JSON.stringify({ error: error.message || 'Failed to fetch holders' }),
     };
   }
