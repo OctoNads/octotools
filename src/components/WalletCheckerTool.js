@@ -228,7 +228,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
                 className="checker-search-bar"
               />
             </div>
-            <label className="checker-label">Select Projects:</label>
+            <label className="checker-label">SELECT PROJECTS FIRST :</label>
             <div className="checker-card-scroll">
               <div className="checker-project-grid">
                 {filteredProjects.length > 0 ? (
