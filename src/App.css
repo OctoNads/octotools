@@ -1011,7 +1011,7 @@ footer {
 
 .checker-result-social-logo {
   font-size: 20px;
-  color: var(--text-color);
+  color: black;
   transition: var(--transition);
   margin-right: 12px;
 }
