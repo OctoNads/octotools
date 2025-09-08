@@ -367,7 +367,7 @@ const SnapshotTool = ({ setIsNavLoading }) => {
                     {collectionMetadata.name}
                     {collectionMetadata.verified && (
                       <img
-                        src="https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreid7pkljli36nzivwmixmdul5pa44qhpcpxgrxukmkawuc3j2shb3e"
+                        src="https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreicacmtobxh4luaqxt2zwl4wbf6snbzotzvxxr5doxtbzbt3ph2o64"
                         alt="Verified Badge"
                         className="verified-badge"
                       />

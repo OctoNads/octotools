@@ -3,30 +3,38 @@ import "../App.css";
 
 const WalletCheckerTool = ({ setIsNavLoading }) => {
   const [projects] = useState([
+
+    {
+      name: "Utility_Card",
+      logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreid3h7whj3ceib45fzdscmulq7pj2ixlgkqwhvyabgy3s5oael3jlm",
+      twitter: "https://x.com/OctoNads",
+      discord: "discord.gg/C6EefTRpzd",
+      isSoldOut: false,
+    },
     {
       name: "Chilpys",
-      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreigl3qooozgkz7by5kg7h2cjumd5wswcdobgiucgo5ixajmll3rwia",
+      logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreiec672dcmekxyd6y6yuzeotxdax7tesbatokmc5uolmmkvc4btwgq",
       twitter: "https://x.com/chilpys?s=21",
       discord: "",
       isSoldOut: true,
     },
     {
       name: "Monadoon",
-      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreigu6pcflmwhz5r3dh2ozponoiqissujiyjnakp5g7r2hfp666fj2i",
+      logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreif4l6h2kkko52lnhr3xqekbkkgjm5bmvvhtnnvpgvtx76cprlj7wa",
       twitter: "https://x.com/Monadoons",
       discord: "https://discord.com/invite/monadoon",
       isSoldOut: true,
     },
     {
       name: "MonadSealsNft",
-      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreieceppvcddmevg22pidzhrxyxf4iqmnbtzcew5dvgm47phsgvxfke",
+      logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreieceppvcddmevg22pidzhrxyxf4iqmnbtzcew5dvgm47phsgvxfke",
       twitter: "https://x.com/MonadSealsNFT",
       discord: "https://discord.com/invite/monadseals",
       isSoldOut: true,
     },
     {
       name: "MonApesClub",
-      logo: "https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreieqbllwhoxctps4b7piupahl4hwuy6efzjwf7pbezylz7czrf26ku",
+      logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreie4drcppth4h5dn4lrmdammq3douanjrqhsdzt4szx5c6xolsnv3i",
       twitter: "https://x.com/MonapesClub_xyz",
       discord: "http://discord.gg/v7aEegVQ",
       isSoldOut: true,

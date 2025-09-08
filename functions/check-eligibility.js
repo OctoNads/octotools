@@ -1,21 +1,26 @@
 const axios = require('axios');
 
 const projects = [
+
+  {
+    name: "Utility_Card",
+    url: "",
+  },
   {
     name: "Chilpys",
-    url: "https://script.google.com/macros/s/AKfycbzMLzGfWNPWTIh1Bl_XYZa4lVBP4dEYucVivkjm1SbsI4gaXp_h235qgOn4CuAvIv54/exec",
+    url: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreiec672dcmekxyd6y6yuzeotxdax7tesbatokmc5uolmmkvc4btwgq",
   },
   {
     name: "Monadoon",
-    url: "https://script.google.com/macros/s/AKfycbwSVREPm_HV9oSjnbaGPm--NL6GqDUoLyfchRb_UzxesITAVC43q3ps7FP4cYFnlJ9n/exec",
+    url: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreif4l6h2kkko52lnhr3xqekbkkgjm5bmvvhtnnvpgvtx76cprlj7wa",
   },
   {
     name: "MonadSealsNft",
-    url: "https://script.google.com/macros/s/AKfycbzoo-qjyqZwJMDtvqv80j2x2wRMNGZOSqf0zpV5gb8LBG1WrnJtuyEiZRdXZJMsAWLa/exec",
+    url: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreieceppvcddmevg22pidzhrxyxf4iqmnbtzcew5dvgm47phsgvxfke",
   },
   {
     name: "MonApesClub",
-    url: "https://script.google.com/macros/s/AKfycbw05PZByqqQoVudP-YK7js19hIdDvgZXS6MbTvWpqvVYEGo79s5vlfXrphu4oaFYbu9/exec",
+    url: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreie4drcppth4h5dn4lrmdammq3douanjrqhsdzt4szx5c6xolsnv3i",
   },
   // Add other projects here as needed
 ];

@@ -7,7 +7,7 @@ const Header = ({ title, subheading, handleNavigation }) => {
       <div className="header-left">
         <div onClick={() => handleNavigation("/")}>
           <img
-            src="https://amethyst-worthy-gayal-734.mypinata.cloud/ipfs/bafkreiguhll5qwfac6x36v362nv2mhgl7so45dd262zpulwq7c4tfwbedq"
+            src="https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreiguhll5qwfac6x36v362nv2mhgl7so45dd262zpulwq7c4tfwbedq"
             alt="OctoNads Logo"
             className="header-logo"
           />
