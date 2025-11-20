@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Search, Wallet, Twitter, Disc, CheckCircle, XCircle, Share2, Lock,
-  Calendar, Tag, Layers, Rocket, Loader2, X, Sparkles, Trophy, Clock
+  Calendar, Tag, Layers, Rocket,Trophy, Clock
 } from "lucide-react";
 
 const WalletCheckerTool = ({ setIsNavLoading }) => {
