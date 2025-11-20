@@ -1,17 +1,23 @@
 /* Root variables for consistent theming with dark purple and light purple theme */
 :root {
-  --background-color: linear-gradient(135deg, #4a148c, #3f1b9a); /* Dark purple gradient */
-  --text-color: #f8ceff; /* Light purple text for shine */
+  --background-color: linear-gradient(135deg, #4a148c, #3f1b9a);
+  /* Dark purple gradient */
+  --text-color: #f8ceff;
+  /* Light purple text for shine */
   --button-bg: #3d1fa2;
   --button-text: #f3e5f5;
   --shadow-color: rgba(0, 0, 0, 0.8);
   --button-hover: #6927b0;
-  --accent-color: #a568c8; /* Light purple accent */
+  --accent-color: #a568c8;
+  /* Light purple accent */
   --secondary-color: #a893d8;
   --gradient-bg: linear-gradient(45deg, #4c1b9a, #6c47bc);
-  --border-radius: 20px; /* Rounded for cartoon feel */
-  --transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Bouncy transition */
-  --text-glow: 0 0 8px rgba(225, 190, 231, 0.8); /* Glow for text */
+  --border-radius: 20px;
+  /* Rounded for cartoon feel */
+  --transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  /* Bouncy transition */
+  --text-glow: 0 0 8px rgba(225, 190, 231, 0.8);
+  /* Glow for text */
 }
 
 /* Dark mode variables - already dark theme */
@@ -28,7 +34,8 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-  font-family: "Comic Sans MS", cursive, sans-serif; /* Playful cartoon font */
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  /* Playful cartoon font */
   background: var(--background-color);
   color: var(--text-color);
   -webkit-text-size-adjust: 100%;
@@ -59,8 +66,15 @@ body {
 }
 
 @keyframes bounceHeader {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 @keyframes fadeIn {
@@ -68,6 +82,7 @@ body {
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -92,7 +107,8 @@ body {
   height: 60px;
   transition: var(--transition), filter 0.3s ease;
   filter: drop-shadow(0 0 5px var(--accent-color));
-  border-radius: 50%; /* Rounded logo for fun */
+  border-radius: 50%;
+  /* Rounded logo for fun */
 }
 
 .header-logo:hover {
@@ -105,7 +121,8 @@ body {
   margin: 0;
   font-size: 28px;
   transition: var(--transition);
-  text-shadow: var(--text-glow); /* Shine effect */
+  text-shadow: var(--text-glow);
+  /* Shine effect */
 }
 
 .header-title .subheading {
@@ -166,9 +183,19 @@ body {
 }
 
 @keyframes wobble {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(2deg); }
-  75% { transform: rotate(-2deg); }
+
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(2deg);
+  }
+
+  75% {
+    transform: rotate(-2deg);
+  }
 }
 
 @keyframes slideInFromBottom {
@@ -176,6 +203,7 @@ body {
     opacity: 0;
     transform: translateY(50px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -186,7 +214,8 @@ body {
   font-size: 36px;
   margin-bottom: 50px;
   transition: var(--transition);
-  text-shadow: var(--text-glow); /* Shine effect */
+  text-shadow: var(--text-glow);
+  /* Shine effect */
 }
 
 .button-group {
@@ -254,7 +283,8 @@ input[type="number"] {
   box-shadow: 0 3px 8px var(--shadow-color);
   transition: var(--transition);
   font-size: 16px;
-  background: #f3e5f5; /* Light purple input bg */
+  background: #f3e5f5;
+  /* Light purple input bg */
   color: #000;
 }
 
@@ -298,7 +328,8 @@ button:disabled {
   overflow-y: auto;
   white-space: pre-wrap;
   box-shadow: 0 3px 12px var(--shadow-color);
-  background: #f3e5f5; /* Light purple */
+  background: #f3e5f5;
+  /* Light purple */
   animation: fadeIn 0.6s ease-in-out;
   color: #000;
 }
@@ -323,7 +354,8 @@ footer {
   position: absolute;
   z-index: 1;
   font-size: 28px;
-  color: rgba(225, 190, 231, 0.4); /* Light purple floating text */
+  color: rgba(225, 190, 231, 0.4);
+  /* Light purple floating text */
   pointer-events: none;
   max-width: 100%;
   overflow: hidden;
@@ -333,8 +365,15 @@ footer {
 }
 
 @keyframes floatBounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(5deg); }
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
 }
 
 .floating-text:hover {
@@ -360,7 +399,8 @@ footer {
   text-align: center;
   color: #f3e5f5;
   box-sizing: border-box;
-  background: #6a1b9a; /* Dark purple modal bg */
+  background: #6a1b9a;
+  /* Dark purple modal bg */
   padding: 25px;
   border-radius: var(--border-radius);
   box-shadow: 0 8px 30px var(--shadow-color);
@@ -372,6 +412,7 @@ footer {
     transform: translateY(-50px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -450,9 +491,26 @@ footer {
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  10%, 30%, 50%, 70%, 90% { transform: translateX(-6px); }
-  20%, 40%, 60%, 80% { transform: translateX(6px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: translateX(-6px);
+  }
+
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: translateX(6px);
+  }
 }
 
 .spinner {
@@ -558,7 +616,8 @@ footer {
   width: 220px;
   height: 220px;
   object-fit: cover;
-  border-radius: 50%; /* Circular for cartoon fun */
+  border-radius: 50%;
+  /* Circular for cartoon fun */
   transition: var(--transition);
   box-shadow: 0 5px 15px var(--shadow-color);
 }
@@ -626,7 +685,8 @@ footer {
   box-shadow: 0 3px 8px var(--shadow-color);
   transition: var(--transition);
   font-size: 16px;
-  background: #f3e5f5; /* Light purple */
+  background: #f3e5f5;
+  /* Light purple */
   color: #000;
 }
 
@@ -675,7 +735,8 @@ footer {
   width: 100%;
   padding: 12px 12px 12px 40px;
   border-radius: var(--border-radius);
-  background: #d1c4e9; /* Light purple search bar */
+  background: #d1c4e9;
+  /* Light purple search bar */
   color: #000;
   font-size: 16px;
   box-shadow: 0 3px 8px var(--shadow-color);
@@ -869,9 +930,11 @@ footer {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.05);
   }
+
   100% {
     transform: scale(1);
   }
@@ -1207,9 +1270,57 @@ footer {
     margin: 10px 0;
   }
 
+
+
+
+ 
   footer {
-    flex-direction: column;
-    padding: 15px;
+    
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    background: linear-gradient(180deg, rgba(106, 27, 154, 0.9), rgba(74, 20, 140, 0.8));
+    backdrop-filter: blur(10px);
+    box-shadow: 0 -4px 20px var(--shadow-color);
+    box-sizing: border-box;
+    margin-top: auto;
+  
+    z-index: 100;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .copyright,
+  .powered-by,
+  .social-icons {
+    color: var(--text-color);
+    text-shadow: var(--text-glow);
+  }
+
+  .social-icons a {
+    color: var(--text-color);
+    margin-left: 15px;
+    font-size: 20px;
+    transition: color 0.3s;
+    text-decoration: none;
+  }
+
+  .social-icons a:hover {
+    color: var(--accent-color);
+  }
+
+  @media (max-width: 768px) {
+    footer {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+    }
   }
 
   .copyright,
