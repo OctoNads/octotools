@@ -4,7 +4,7 @@ const projects = [
 
   {
     name: "Utility_Card",
-    url: "https://script.google.com/macros/s/AKfycbyKkqXEZIqxLoYuRx3aEk6IcuUMUGQptzUwlgq3kbSDPn5KXg3jpgEMhFEifEhRMGAP/exec",
+    url: "https://script.google.com/macros/s/AKfycbxqxp4CyVU4onO3gWXPA7U0C4fABEOQSC8zriB54NHXkIRm0hE6mnCoZ9gvG2NwAJZT/exec",
   },
   {
     name: "Chilpys",
@@ -27,69 +27,50 @@ const projects = [
 
 exports.handler = async (event) => {
   if (event.httpMethod !== 'POST') {
-    return {
-      statusCode: 405,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Method Not Allowed' }),
-    };
+    return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
   }
 
   let body;
   try {
     body = JSON.parse(event.body);
   } catch (error) {
-    return {
-      statusCode: 400,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Invalid JSON body' }),
-    };
+    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid JSON' }) };
   }
 
   const { walletAddress, projectNames } = body;
-
-  if (!walletAddress || !/^0x[a-fA-F0-9]{40}$/.test(walletAddress) || !projectNames || !Array.isArray(projectNames)) {
-    return {
-      statusCode: 400,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Invalid input: walletAddress and projectNames array required' }),
-    };
+  if (!walletAddress || !/^0x[a-fA-F0-9]{40}$/.test(walletAddress) || !Array.isArray(projectNames)) {
+    return { statusCode: 400, body: JSON.stringify({ error: 'Invalid input' }) };
   }
 
-  try {
-    const projectChecks = projectNames.map(async (name) => {
-      const project = projects.find((p) => p.name === name);
-      if (!project) return { [name]: { eligible: false } };
+  const results = {};
 
-      const url = `${project.url}?wallet=${encodeURIComponent(walletAddress)}`;
-      try {
-        const response = await axios.get(url, { timeout: 10000 });
-        const data = response.data;
-        return { [name]: { eligible: data.eligible, phase: data.phase || null } };
-      } catch (error) {
-        console.error(`Error checking ${name}:`, error.message);
-        return { [name]: { eligible: false } };
-      }
-    });
+  for (const name of projectNames) {
+    const project = projects.find(p => p.name === name);
+    if (!project) {
+      results[name] = { eligible: false };
+      continue;
+    }
 
-    const results = await Promise.all(projectChecks);
-    const eligibility = results.reduce((acc, curr) => ({ ...acc, ...curr }), {});
+    try {
+      const response = await axios.get(`${project.url}?wallet=${walletAddress}`, { timeout: 10000 });
+      const data = response.data;
 
-    // Ensure all requested projectNames are in the response
-    projectNames.forEach((name) => {
-      if (!(name in eligibility)) eligibility[name] = { eligible: false };
-    });
-
-    return {
-      statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(eligibility),
-    };
-  } catch (error) {
-    console.error('Error in check-eligibility:', error.message);
-    return {
-      statusCode: 500,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ error: 'Server error' }),
-    };
+      results[name] = {
+        eligible: data.eligible === true,
+        spotType: data.spotType || "TBA",
+        phase: data.phase || "TBA",
+        mintDate: data.mintDate || "TBA",
+        mintLaunchpad: data.mintLaunchpad || "TBA"
+      };
+    } catch (err) {
+      console.error(`Error fetching ${name}:`, err.message);
+      results[name] = { eligible: false };
+    }
   }
+
+  return {
+    statusCode: 200,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(results)
+  };
 };

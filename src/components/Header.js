@@ -27,7 +27,7 @@ const Header = ({ title, subheading, handleNavigation }) => {
           className="top-right-button"
           aria-label="Upload Project"
         >
-          <span className="button-text">Upload Project ?</span>
+          <span className="button-text">Contact us ?</span>
           <i className="fas fa-upload button-icon"></i>
         </button>
       </div>
