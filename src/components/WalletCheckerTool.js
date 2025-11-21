@@ -7,7 +7,7 @@ import {
 const WalletCheckerTool = ({ setIsNavLoading }) => {
   const [projects] = useState([
     { name: "OctoNads_Genesis", logo: "https://teal-quiet-canidae-615.mypinata.cloud/ipfs/bafybeid6ni6n5dufgvl3stkmrg4ngtayiozesj6lql2vhfyemjdubrebii", twitter: "https://x.com/OctoNads", discord: "discord.gg/C6EefTRpzd", isSoldOut: false, isTrending: true },
-    { name: "Utility_Card", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreid3h7whj3ceib45fzdscmulq7pj2ixlgkqwhvyabgy3s5oael3jlm", twitter: "https://x.com/OctoNads", discord: "discord.gg/C6EefTRpzd", isSoldOut: false, isTrending: true },
+    { name: "Utility_Card", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreid3h7whj3ceib45fzdscmulq7pj2ixlgkqwhvyabgy3s5oael3jlm", twitter: "https://x.com/OctoNads", discord: "discord.gg/C6EefTRpzd", isSoldOut: true, isTrending: true },
     { name: "Chilpys", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreiec672dcmekxyd6y6yuzeotxdax7tesbatokmc5uolmmkvc4btwgq", twitter: "https://x.com/chilpys?s=21", discord: "", isSoldOut: true, isTrending: false },
     { name: "Monadoon", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreif4l6h2kkko52lnhr3xqekbkkgjm5bmvvhtnnvpgvtx76cprlj7wa", twitter: "https://x.com/Monadoons", discord: "https://discord.com/invite/monadoon", isSoldOut: true, isTrending: false },
     { name: "MonadSealsNft", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreieceppvcddmevg22pidzhrxyxf4iqmnbtzcew5dvgm47phsgvxfke", twitter: "https://x.com/MonadSealsNFT", discord: "https://discord.com/invite/monadseals", isSoldOut: true, isTrending: false },
