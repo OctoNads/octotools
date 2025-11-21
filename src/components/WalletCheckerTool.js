@@ -168,7 +168,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
     const hasEligible = eligibleProjects.length > 0;
 
     const text = hasEligible
-      ? `I'm whitelisted for ${uniqueHandles} on Monad! 🚀\nCheck yours → https://octotools.xyz/wallet-checker`
+      ? `I'm Eligible to mint ${uniqueHandles} on Monad Mainnet ! 🚀\n Powered By @OctoNads \nCheck yours → https://octotools.xyz/wallet-checker`
       : `Checked my Monad whitelist status! 🚀 @OctoNads\nCheck yours → https://octotools.xyz/wallet-checker`;
 
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
