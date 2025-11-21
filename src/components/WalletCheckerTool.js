@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import {
   Search, Wallet, Twitter, Disc, CheckCircle, XCircle, Share2, Lock,
-  Calendar, Tag, Layers, Rocket,Trophy, Clock
+  Calendar, Tag, Layers, Rocket, Trophy, Clock, Flame
 } from "lucide-react";
 
 const WalletCheckerTool = ({ setIsNavLoading }) => {
   const [projects] = useState([
-    { name: "Utility_Card", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreid3h7whj3ceib45fzdscmulq7pj2ixlgkqwhvyabgy3s5oael3jlm", twitter: "https://x.com/OctoNads", discord: "discord.gg/C6EefTRpzd", isSoldOut: false },
-    { name: "Chilpys", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreiec672dcmekxyd6y6yuzeotxdax7tesbatokmc5uolmmkvc4btwgq", twitter: "https://x.com/chilpys?s=21", discord: "", isSoldOut: true },
-    { name: "Monadoon", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreif4l6h2kkko52lnhr3xqekbkkgjm5bmvvhtnnvpgvtx76cprlj7wa", twitter: "https://x.com/Monadoons", discord: "https://discord.com/invite/monadoon", isSoldOut: true },
-    { name: "MonadSealsNft", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreieceppvcddmevg22pidzhrxyxf4iqmnbtzcew5dvgm47phsgvxfke", twitter: "https://x.com/MonadSealsNFT", discord: "https://discord.com/invite/monadseals", isSoldOut: true },
-    { name: "MonApesClub", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreie4drcppth4h5dn4lrmdammq3douanjrqhsdzt4szx5c6xolsnv3i", twitter: "https://x.com/MonapesClub_xyz", discord: "http://discord.gg/v7aEegVQ", isSoldOut: true },
+    { name: "OctoNads_Genesis", logo: "https://teal-quiet-canidae-615.mypinata.cloud/ipfs/bafybeid6ni6n5dufgvl3stkmrg4ngtayiozesj6lql2vhfyemjdubrebii", twitter: "https://x.com/OctoNads", discord: "discord.gg/C6EefTRpzd", isSoldOut: false, isTrending: true },
+    { name: "Utility_Card", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreid3h7whj3ceib45fzdscmulq7pj2ixlgkqwhvyabgy3s5oael3jlm", twitter: "https://x.com/OctoNads", discord: "discord.gg/C6EefTRpzd", isSoldOut: false, isTrending: true },
+    { name: "Chilpys", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreiec672dcmekxyd6y6yuzeotxdax7tesbatokmc5uolmmkvc4btwgq", twitter: "https://x.com/chilpys?s=21", discord: "", isSoldOut: true, isTrending: false },
+    { name: "Monadoon", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreif4l6h2kkko52lnhr3xqekbkkgjm5bmvvhtnnvpgvtx76cprlj7wa", twitter: "https://x.com/Monadoons", discord: "https://discord.com/invite/monadoon", isSoldOut: true, isTrending: false },
+    { name: "MonadSealsNft", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreieceppvcddmevg22pidzhrxyxf4iqmnbtzcew5dvgm47phsgvxfke", twitter: "https://x.com/MonadSealsNFT", discord: "https://discord.com/invite/monadseals", isSoldOut: true, isTrending: false },
+    { name: "MonApesClub", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreie4drcppth4h5dn4lrmdammq3douanjrqhsdzt4szx5c6xolsnv3i", twitter: "https://x.com/MonapesClub_xyz", discord: "http://discord.gg/v7aEegVQ", isSoldOut: true, isTrending: false },
   ]);
 
   const [selectedProjects, setSelectedProjects] = useState([]);
@@ -32,8 +33,6 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
   // Animation & Modal State
   const [showConfetti, setShowConfetti] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  
-  // === NEW: Countdown State ===
   const [countDown, setCountDown] = useState(5);
 
   useEffect(() => { if (setIsNavLoading) setIsNavLoading(false); }, [setIsNavLoading]);
@@ -45,7 +44,6 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
     }
   }, [showConfetti]);
 
-  // === NEW: Auto-Close Timer Logic ===
   useEffect(() => {
     let timer;
     if (showSuccessModal) {
@@ -80,34 +78,30 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
     setSelectedProjects(prev =>
       prev.includes(name) ? prev.filter(p => p !== name) : [...prev, name]
     );
-    // Clear error if they select something
     if (selectedProjects.length === 0) setSelectionError("");
   };
 
   const handleSearch = async (e) => {
     e.preventDefault();
-    
+
     if (selectedProjects.length === 0) {
       setSelectionError("Select Project First to check");
       return;
     }
-    
+
     if (!walletAddress || addressError) {
       setFetchError("Enter valid wallet");
       return;
     }
 
-    // Clear errors
     setSelectionError("");
     setFetchError("");
-
     setIsLoading(true);
     setEligibilityResults({});
     setShowConfetti(false);
     setShowSuccessModal(false);
 
     try {
-      
       await new Promise(resolve => setTimeout(resolve, 1500));
       const response = await fetch("/.netlify/functions/check-eligibility", {
         method: "POST",
@@ -116,28 +110,34 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
       });
       if (!response.ok) throw new Error("Server error");
       const data = await response.json();
+
       const enriched = {};
       let hasSuccess = false;
 
       selectedProjects.forEach(name => {
-        const result = data[name] || { eligible: false };
+        const rawResult = data[name] || { eligible: false, entries: [] };
         const info = projects.find(p => p.name === name);
 
+        // Keep all entries for multi-phase display
+        const entries = Array.isArray(rawResult.entries) ? rawResult.entries : [];
+
         enriched[name] = {
-          eligible: result.eligible === true,
-          spotType: result.spotType || "TBA",
-          phase: result.phase || "TBA",
-          mintDate: result.mintDate || "TBA",
-          mintLaunchpad: result.mintLaunchpad || "TBA",
+          eligible: rawResult.eligible === true,
+          entries: entries.map(e => ({
+            spotType: e.spotType || "TBA",
+            phase: e.phase || "TBA",
+            mintDate: e.mintDate || "TBA",
+            mintLaunchpad: e.mintLaunchpad || "TBA"
+          })),
           ...info
         };
-        if (result.eligible) hasSuccess = true;
+
+        if (rawResult.eligible) hasSuccess = true;
       });
 
       setEligibilityResults(enriched);
       if (hasSuccess) {
         setShowConfetti(true);
-        // === UPDATE: Reset Timer and Show Modal ===
         setCountDown(5);
         setShowSuccessModal(true);
       }
@@ -149,15 +149,27 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
     }
   };
 
-  const handleShare = () => {
-    const eligible = Object.entries(eligibilityResults)
-      .filter(([_, r]) => r.eligible)
-      .map(([n]) => n)
-      .join(", ");
+  const extractTwitterHandle = (url) => {
+    try {
+      const pathname = new URL(url).pathname;
+      const username = pathname.slice(1).split('/')[0].split('?')[0];
+      return username ? `@${username}` : '';
+    } catch {
+      return '';
+    }
+  };
 
-    const text = eligible
-      ? `I'm whitelisted for ${eligible} on Monad! 🚀\nCheck yours → https://octotools.xyz/wallet-checker`
-      : `Checked my Monad whitelist status!\nhttps://octotools.xyz @OctoNads`;
+  const handleShare = () => {
+    const eligibleProjects = Object.values(eligibilityResults).filter(r => r.eligible);
+
+    const handles = eligibleProjects.map(p => extractTwitterHandle(p.twitter));
+    const uniqueHandles = [...new Set(handles.filter(Boolean))].join(' ');
+
+    const hasEligible = eligibleProjects.length > 0;
+
+    const text = hasEligible
+      ? `I'm whitelisted for ${uniqueHandles} on Monad! 🚀\nCheck yours → https://octotools.xyz/wallet-checker`
+      : `Checked my Monad whitelist status! 🚀 @OctoNads\nCheck yours → https://octotools.xyz/wallet-checker`;
 
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, "_blank");
   };
@@ -167,6 +179,7 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
   );
 
   const eligibleCount = Object.values(eligibilityResults).filter(r => r.eligible).length;
+
 
   return (
     <div className="checker-page-wrapper">
@@ -251,6 +264,44 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
             .result-details-grid {
                 grid-template-columns: 1fr !important;
             }
+        }
+
+        /* === TRENDING BADGE (NEW) === */
+        .trending-badge {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+            color: white;
+            padding: 4px 8px 4px 6px;
+            border-bottom-right-radius: 12px;
+            border-top-left-radius: 16px;
+            font-size: 10px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            z-index: 20;
+            box-shadow: 2px 2px 10px rgba(221, 36, 118, 0.6);
+            animation: firePulse 1.5s infinite;
+            border-right: 1px solid rgba(255,255,255,0.3);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .fire-icon {
+            animation: flicker 0.4s infinite alternate;
+        }
+
+        @keyframes firePulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 81, 47, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(255, 81, 47, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 81, 47, 0); }
+        }
+
+        @keyframes flicker {
+            from { transform: scale(1) rotate(-5deg); opacity: 1; }
+            to { transform: scale(1.2) rotate(5deg); opacity: 0.8; }
         }
 
         /* === CONFETTI ANIMATION === */
@@ -866,68 +917,45 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
 
       <div className={`checker-content ${accessGranted ? "access-granted" : "blur-locked"}`}>
         <div className="checker-split-layout">
-
-          {/* LEFT PANEL */}
+          {/* LEFT PANEL - unchanged */}
           <div className="checker-left-panel">
             <div className="panel-header">
               <h2>Select Projects</h2>
               <div className="search-wrapper">
                 <Search className="search-icon" size={18} />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="     Search collections..."
-                  className="modern-search-input"
-                />
+                <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="      Search collections..." className="modern-search-input" />
               </div>
             </div>
-
             <div className="projects-grid">
               {filteredProjects.map((project) => (
-                <div
-                  key={project.name}
-                  className={`project-card ${project.isSoldOut ? "sold-out" : ""} ${selectedProjects.includes(project.name) ? "selected" : ""}`}
-                  onClick={() => handleProjectSelection(project.name)}
-                >
-                  {selectedProjects.includes(project.name) && (
-                    <div className="selected-badge">
-                      <CheckCircle size={20} fill="#aeea00" color="#000" />
+                <div key={project.name} className={`project-card ${project.isSoldOut ? "sold-out" : ""} ${selectedProjects.includes(project.name) ? "selected" : ""}`} onClick={() => handleProjectSelection(project.name)}>
+                  
+                  {/* TRENDING BADGE (NEW) */}
+                  {project.isTrending && (
+                    <div className="trending-badge">
+                      <Flame size={12} fill="#fff" className="fire-icon" />
+                      <span>HOT</span>
                     </div>
                   )}
-                  <div className="card-image-container">
-                    <img src={project.logo} alt={project.name} className="card-logo" />
-                  </div>
+
+                  {selectedProjects.includes(project.name) && <div className="selected-badge"><CheckCircle size={20} fill="#aeea00" color="#000" /></div>}
+                  <div className="card-image-container"><img src={project.logo} alt={project.name} className="card-logo" /></div>
                   <h3 className="card-title">{project.name}</h3>
                   <div className="card-socials">
-                    {project.twitter && (
-                      <a href={project.twitter} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
-                        <Twitter size={14} />
-                      </a>
-                    )}
-                    {project.discord && (
-                      <a href={project.discord} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>
-                        <Disc size={14} />
-                      </a>
-                    )}
+                    {project.twitter && <a href={project.twitter} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}><Twitter size={14} /></a>}
+                    {project.discord && <a href={project.discord} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}><Disc size={14} /></a>}
                   </div>
                   {project.isSoldOut && <div className="sold-out-overlay"><span>MINTED OUT</span></div>}
                 </div>
               ))}
             </div>
-
-            {selectedProjects.length > 0 && (
-              <div className="selection-summary">
-                Selected: <strong>{selectedProjects.length}</strong> projects
-              </div>
-            )}
+            {selectedProjects.length > 0 && <div className="selection-summary">Selected: <strong>{selectedProjects.length}</strong> projects</div>}
           </div>
 
-          {/* RIGHT PANEL */}
+          {/* RIGHT PANEL - UPDATED RESULTS DISPLAY */}
           <div className="checker-right-panel">
             <div className="glass-panel">
               <h2 className="panel-title">Did you Check ?</h2>
-
               {fetchError && <div style={{ color: "#ff5252", textAlign: "center", marginBottom: "15px" }}>{fetchError}</div>}
 
               <form onSubmit={handleSearch} className="checker-form-modern">
@@ -935,26 +963,13 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
                   <label>Enter Wallet Address</label>
                   <div className="input-with-icon">
                     <Wallet className="input-icon" size={18} />
-                    <input
-                      type="text"
-                      value={walletAddress}
-                      onChange={(e) => {
-                        setWalletAddress(e.target.value);
-                        validateAddress(e.target.value);
-                      }}
-                      placeholder="0x..."
-                      className={addressError ? "error-input" : ""}
-                    />
+                    <input type="text" value={walletAddress} onChange={(e) => { setWalletAddress(e.target.value); validateAddress(e.target.value); }} placeholder="0x..." className={addressError ? "error-input" : ""} />
                   </div>
                   {addressError && <span className="field-error">{addressError}</span>}
                   {selectionError && <span className="field-error">{selectionError}</span>}
                 </div>
 
-                <button
-                  type="submit"
-                  className="check-btn-modern"
-                  disabled={isLoading || !walletAddress || !!addressError}
-                >
+                <button type="submit" className="check-btn-modern" disabled={isLoading || !walletAddress || !!addressError}>
                   {isLoading ? <div className="loader" /> : "Check Eligibility"}
                 </button>
               </form>
@@ -974,24 +989,32 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
                           </div>
                         </div>
 
-                        {r.eligible && (
-                          <div className="result-details-grid">
-                            <div className="detail-item">
-                              <div className="detail-label"><Tag size={10} /> Spot Type</div>
-                              <div className="detail-value">{r.spotType}</div>
-                            </div>
-                            <div className="detail-item">
-                              <div className="detail-label"><Layers size={10} /> Phase</div>
-                              <div className="detail-value">{r.phase}</div>
-                            </div>
-                            <div className="detail-item">
-                              <div className="detail-label"><Calendar size={10} /> Mint Date</div>
-                              <div className="detail-value">{r.mintDate}</div>
-                            </div>
-                            <div className="detail-item">
-                              <div className="detail-label"><Rocket size={10} /> Launchpad</div>
-                              <div className="detail-value">{r.mintLaunchpad}</div>
-                            </div>
+                        {r.eligible && r.entries.length > 0 && (
+                          <div style={{ padding: "0 16px 16px" }}>
+                            {r.entries.map((entry, idx) => (
+                              <div key={idx} style={{ marginBottom: idx < r.entries.length - 1 ? "16px" : "0" }}>
+                                {r.entries.length > 1 && <div style={{ fontSize: "12px", color: "#ffd700", marginBottom: "8px", fontWeight: "bold" }}>Spot #{idx + 1}</div>}
+                                <div className="result-details-grid">
+                                  <div className="detail-item">
+                                    <div className="detail-label"><Tag size={10} /> Spot Type</div>
+                                    <div className="detail-value">{entry.spotType}</div>
+                                  </div>
+                                  <div className="detail-item">
+                                    <div className="detail-label"><Layers size={10} /> Phase</div>
+                                    <div className="detail-value">{entry.phase}</div>
+                                  </div>
+                                  <div className="detail-item">
+                                    <div className="detail-label"><Calendar size={10} /> Mint Date</div>
+                                    <div className="detail-value">{entry.mintDate}</div>
+                                  </div>
+                                  <div className="detail-item">
+                                    <div className="detail-label"><Rocket size={10} /> Launchpad</div>
+                                    <div className="detail-value">{entry.mintLaunchpad}</div>
+                                  </div>
+                                </div>
+                                {idx < r.entries.length - 1 && <hr style={{ border: "1px dashed rgba(255,255,255,0.2)", margin: "12px 0" }} />}
+                              </div>
+                            ))}
                           </div>
                         )}
                       </div>
@@ -1014,58 +1037,31 @@ const WalletCheckerTool = ({ setIsNavLoading }) => {
         </div>
       </div>
 
-      {/* === SUCCESS POPUP MODAL === */}
+      {/* SUCCESS MODAL */}
       {showSuccessModal && (
-        <div className="success-modal-overlay">
-          <div className="success-modal-card">
-            
-            {/* === NEW: Countdown Timer Display === */}
-            <div className="auto-close-timer">
-                <Clock size={12} /> Closing in {countDown}s
-            </div>
-
-            <div className="success-icon-wrapper">
-              <Trophy size={50} color="#4a148c" fill="#4a148c" />
-            </div>
-
+        <div className="success-modal-overlay" onClick={() => setShowSuccessModal(false)}>
+          <div className="success-modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="auto-close-timer"><Clock size={12} /> Closing in {countDown}s</div>
+            <div className="success-icon-wrapper"><Trophy size={50} color="#4a148c" fill="#4a148c" /></div>
             <h2 className="success-title">Congratulations!</h2>
             <p className="success-subtitle">
-              You are Eligible for <span className="highlight-text">{eligibleCount}</span> Project!
+              You are Eligible for <span className="highlight-text">{eligibleCount}</span> Project{eligibleCount > 1 ? "s" : ""}!
             </p>
-
-            <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginBottom: '20px', flexWrap: 'wrap' }}>
-              {Object.entries(eligibilityResults)
-                .filter(([_, r]) => r.eligible)
-                .slice(0, 3) // Show max 3 icons
-                .map(([name, r]) => (
-                  <img key={name} src={r.logo} style={{ width: '40px', height: '40px', borderRadius: '50%', border: '2px solid #ffd700' }} alt="" />
-                ))}
-              {eligibleCount > 3 && <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold' }}>+{eligibleCount - 3}</div>}
-            </div>
-
             <button onClick={handleShare} className="check-btn-modern" style={{ marginTop: '0' }}>
-              <Twitter size={20} style={{ marginRight: '10px' }} />  Share on X
+              <Twitter size={20} style={{ marginRight: '10px' }} /> Share on X
             </button>
           </div>
         </div>
       )}
 
-      {/* LOCK MODAL */}
       {!accessGranted && (
         <div className="lock-modal">
           <div className="lock-content">
-            <div className="lock-icon-bg">
-              <Lock size={40} color="#fff" />
-            </div>
+            <div className="lock-icon-bg"><Lock size={40} color="#fff" /></div>
             <h2>Want to Access ?</h2>
             <p>Enter the access code (GOCTO) to get enter OCTONADS Kingdom.</p>
             <form onSubmit={handleAccessSubmit}>
-              <input
-                value={accessInput}
-                onChange={(e) => setAccessInput(e.target.value)}
-                placeholder="Code (GOCTO)"
-                autoFocus
-              />
+              <input value={accessInput} onChange={(e) => setAccessInput(e.target.value)} placeholder="Code (GOCTO)" autoFocus />
               <button type="submit">Unlock</button>
             </form>
             {accessError && <p className="shake-text">Access Denied</p>}
