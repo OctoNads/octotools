@@ -6,6 +6,7 @@ import {
 
 const WalletCheckerTool = ({ setIsNavLoading }) => {
   const [projects] = useState([
+    { name: "OwlsNad", logo: "https://teal-quiet-canidae-615.mypinata.cloud/ipfs/bafybeifsqe6grberduetquf2wxvj3vc252qmju4335ykpzfjpl3wgimhtu/owls.jpg", twitter: "https://x.com/Owls_nft_", discord: "https://discord.com/invite/NSjZhMakz8", isSoldOut: false, isTrending: true },
     { name: "OctoNads_Genesis", logo: "https://teal-quiet-canidae-615.mypinata.cloud/ipfs/bafybeid6ni6n5dufgvl3stkmrg4ngtayiozesj6lql2vhfyemjdubrebii", twitter: "https://x.com/OctoNads", discord: "discord.gg/C6EefTRpzd", isSoldOut: false, isTrending: true },
     { name: "Utility_Card", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreid3h7whj3ceib45fzdscmulq7pj2ixlgkqwhvyabgy3s5oael3jlm", twitter: "https://x.com/OctoNads", discord: "discord.gg/C6EefTRpzd", isSoldOut: true, isTrending: true },
     { name: "Chilpys", logo: "https://red-kind-moose-832.mypinata.cloud/ipfs/bafkreiec672dcmekxyd6y6yuzeotxdax7tesbatokmc5uolmmkvc4btwgq", twitter: "https://x.com/chilpys?s=21", discord: "", isSoldOut: true, isTrending: false },

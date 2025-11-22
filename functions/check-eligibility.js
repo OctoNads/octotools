@@ -2,6 +2,10 @@ const axios = require('axios');
 
 const projects = [
 
+    {
+    name: "OwlsNad",
+    url: "https://script.google.com/macros/s/AKfycbzkALHK_djf2QV1qUZFPbEDrZbaYQdSPD0T9-98l7zBHavxlShQecrQXypAEX2u-DMyng/exec"
+  },
   {
     name: "OctoNads_Genesis",
     url: "https://script.google.com/macros/s/AKfycbwRWPVET2Q3oB3p_SUnt7utN699Cjlh_PhEhLoEeHDCyGvgMxKKtfDBRJSsaPY4cMn9rg/exec"
